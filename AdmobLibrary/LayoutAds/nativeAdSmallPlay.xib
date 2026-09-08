@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="small-play-ad-view" customClass="GADNativeAdView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="container-view">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="content-container">
+                            <rect key="frame" x="8" y="8" width="304" height="114"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="top-section">
+                                    <rect key="frame" x="0.0" y="0.0" width="304" height="58"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icon-container">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ad-app-icon">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="icon-height"/>
+                                                <constraint firstAttribute="bottom" secondItem="ad-app-icon" secondAttribute="bottom" id="icon-inner-bottom"/>
+                                                <constraint firstItem="ad-app-icon" firstAttribute="leading" secondItem="icon-container" secondAttribute="leading" id="icon-inner-leading"/>
+                                                <constraint firstItem="ad-app-icon" firstAttribute="top" secondItem="icon-container" secondAttribute="top" id="icon-inner-top"/>
+                                                <constraint firstAttribute="trailing" secondItem="ad-app-icon" secondAttribute="trailing" id="icon-inner-trailing"/>
+                                                <constraint firstAttribute="width" constant="50" id="icon-width"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="text-container">
+                                            <rect key="frame" x="54" y="0.0" width="250" height="58"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Test Ads" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ad-headline">
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="17"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Ad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ad-badge">
+                                                    <rect key="frame" x="0.0" y="16" width="16" height="16"/>
+                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="badge-height"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="badge-width"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ad-stars">
+                                                    <rect key="frame" x="16" y="16" width="80" height="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="14" id="stars-height"/>
+                                                        <constraint firstAttribute="width" constant="80" id="stars-width"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Ads to you" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ad-body">
+                                                    <rect key="frame" x="0.0" y="37" width="250" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="ad-badge" firstAttribute="centerY" secondItem="ad-stars" secondAttribute="centerY" id="badge-centerY"/>
+                                                <constraint firstItem="ad-badge" firstAttribute="leading" secondItem="text-container" secondAttribute="leading" id="badge-leading"/>
+                                                <constraint firstAttribute="bottom" secondItem="ad-body" secondAttribute="bottom" id="body-bottom"/>
+                                                <constraint firstItem="ad-body" firstAttribute="leading" secondItem="text-container" secondAttribute="leading" id="body-leading"/>
+                                                <constraint firstItem="ad-body" firstAttribute="top" secondItem="ad-stars" secondAttribute="bottom" constant="4" id="body-top"/>
+                                                <constraint firstAttribute="trailing" secondItem="ad-body" secondAttribute="trailing" id="body-trailing"/>
+                                                <constraint firstItem="ad-headline" firstAttribute="leading" secondItem="text-container" secondAttribute="leading" id="headline-leading"/>
+                                                <constraint firstItem="ad-headline" firstAttribute="top" secondItem="text-container" secondAttribute="top" id="headline-top"/>
+                                                <constraint firstAttribute="trailing" secondItem="ad-headline" secondAttribute="trailing" id="headline-trailing"/>
+                                                <constraint firstItem="ad-stars" firstAttribute="leading" secondItem="ad-badge" secondAttribute="trailing" constant="8" id="stars-leading"/>
+                                                <constraint firstItem="ad-stars" firstAttribute="top" secondItem="ad-headline" secondAttribute="bottom" constant="2" id="stars-top"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="icon-container" secondAttribute="bottom" id="icon-bottom"/>
+                                        <constraint firstItem="icon-container" firstAttribute="leading" secondItem="top-section" secondAttribute="leading" id="icon-leading"/>
+                                        <constraint firstItem="icon-container" firstAttribute="top" secondItem="top-section" secondAttribute="top" id="icon-top"/>
+                                        <constraint firstAttribute="bottom" secondItem="text-container" secondAttribute="bottom" id="text-bottom"/>
+                                        <constraint firstItem="text-container" firstAttribute="leading" secondItem="icon-container" secondAttribute="trailing" constant="4" id="text-leading"/>
+                                        <constraint firstItem="text-container" firstAttribute="top" secondItem="top-section" secondAttribute="top" id="text-top"/>
+                                        <constraint firstAttribute="trailing" secondItem="text-container" secondAttribute="trailing" id="text-trailing"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ad-call-to-action">
+                                    <rect key="frame" x="0.0" y="74" width="304" height="40"/>
+                                    <color key="backgroundColor" red="0.0" green="0.45882352939999999" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="cta-height"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                    <state key="normal" title="INSTALL">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="ad-call-to-action" secondAttribute="bottom" id="cta-bottom"/>
+                                <constraint firstItem="ad-call-to-action" firstAttribute="leading" secondItem="content-container" secondAttribute="leading" id="cta-leading"/>
+                                <constraint firstItem="ad-call-to-action" firstAttribute="top" secondItem="top-section" secondAttribute="bottom" constant="16" id="cta-top"/>
+                                <constraint firstAttribute="trailing" secondItem="ad-call-to-action" secondAttribute="trailing" id="cta-trailing"/>
+                                <constraint firstItem="top-section" firstAttribute="leading" secondItem="content-container" secondAttribute="leading" id="top-leading"/>
+                                <constraint firstItem="top-section" firstAttribute="top" secondItem="content-container" secondAttribute="top" id="top-top"/>
+                                <constraint firstAttribute="trailing" secondItem="top-section" secondAttribute="trailing" id="top-trailing"/>
+                            </constraints>
+                        </view>
+                        <view hidden="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="ad-media" customClass="GADMediaView">
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="media-height"/>
+                                <constraint firstAttribute="width" id="media-width"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="content-container" secondAttribute="bottom" constant="8" id="container-bottom"/>
+                        <constraint firstItem="content-container" firstAttribute="leading" secondItem="container-view" secondAttribute="leading" constant="8" id="container-leading"/>
+                        <constraint firstItem="content-container" firstAttribute="top" secondItem="container-view" secondAttribute="top" constant="8" id="container-top"/>
+                        <constraint firstAttribute="trailing" secondItem="content-container" secondAttribute="trailing" constant="8" id="container-trailing"/>
+                        <constraint firstItem="ad-media" firstAttribute="leading" secondItem="container-view" secondAttribute="leading" id="media-leading"/>
+                        <constraint firstItem="ad-media" firstAttribute="top" secondItem="container-view" secondAttribute="top" id="media-top"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="advertiser-hidden">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="price-hidden">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="store-hidden">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="safe-area"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="advertiser-hidden" firstAttribute="width" secondItem="small-play-ad-view" secondAttribute="width" id="advertiser-width"/>
+                <constraint firstAttribute="bottom" secondItem="container-view" secondAttribute="bottom" id="container-bottom-main"/>
+                <constraint firstItem="container-view" firstAttribute="leading" secondItem="small-play-ad-view" secondAttribute="leading" id="container-leading-main"/>
+                <constraint firstItem="container-view" firstAttribute="top" secondItem="small-play-ad-view" secondAttribute="top" id="container-top-main"/>
+                <constraint firstAttribute="trailing" secondItem="container-view" secondAttribute="trailing" id="container-trailing-main"/>
+                <constraint firstItem="price-hidden" firstAttribute="width" secondItem="small-play-ad-view" secondAttribute="width" id="price-width"/>
+                <constraint firstItem="store-hidden" firstAttribute="width" secondItem="small-play-ad-view" secondAttribute="width" id="store-width"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="advertiserView" destination="advertiser-hidden" id="advertiser-connection"/>
+                <outlet property="bodyView" destination="ad-body" id="body-connection"/>
+                <outlet property="callToActionView" destination="ad-call-to-action" id="cta-connection"/>
+                <outlet property="headlineView" destination="ad-headline" id="headline-connection"/>
+                <outlet property="iconView" destination="ad-app-icon" id="icon-connection"/>
+                <outlet property="mediaView" destination="ad-media" id="media-connection"/>
+                <outlet property="priceView" destination="price-hidden" id="price-connection"/>
+                <outlet property="starRatingView" destination="ad-stars" id="stars-connection"/>
+                <outlet property="storeView" destination="store-hidden" id="store-connection"/>
+            </connections>
+            <point key="canvasLocation" x="13.043478260869566" y="-6.0267857142857144"/>
+        </view>
+    </objects>
+</document>
