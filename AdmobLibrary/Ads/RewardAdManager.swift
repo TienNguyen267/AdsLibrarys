@@ -6,19 +6,20 @@
 //
 
 import SwiftUI
-import GoogleMobileAds
+@preconcurrency import GoogleMobileAds
 
 // Interstitial Ad Manager
+@MainActor
 class RewardAdManager: NSObject, FullScreenContentDelegate {
      var rewardedAd: RewardedAd?
      var isLoading = false
-     var onAdDismissed: ((Bool) -> Void)?
+     var onAdDismissed: (@MainActor @Sendable (Bool) -> Void)?
      var isGranted = false
     
     func loadRewardedAdAd(adUnitID: String,
-                            onAdLoaded: (() -> Void)? = nil,
-                            onAdFailedToLoad: ((Error) -> Void)? = nil,
-                            onAdDismissed: ((Bool) -> Void)? = nil) {
+                            onAdLoaded: (@MainActor @Sendable () -> Void)? = nil,
+                            onAdFailedToLoad: (@MainActor @Sendable (Error) -> Void)? = nil,
+                            onAdDismissed: (@MainActor @Sendable (Bool) -> Void)? = nil) {
         
         guard !isLoading else { return }
         
@@ -37,36 +38,36 @@ class RewardAdManager: NSObject, FullScreenContentDelegate {
         let adID = Common.isDebug
             ? "ca-app-pub-3940256099942544/1712485313"
             : adUnitID
-        RewardedAd.load(with: adID, request: request) { [weak self] ad, error in
-            guard let self = self else { return }
             
-            DispatchQueue.main.async {
+        Task { @MainActor [weak self] in
+            guard let self = self else { return }
+            do {
+                let ad = try await RewardedAd.load(with: adID, request: request)
                 self.isLoading = false
-                
-                if let error = error {
-                    print("Failed to load rewardedAd ad: \(error.localizedDescription)")
-                    // Ẩn loading view khi load thất bại
-                    LoadingAdViewController.shared.hide()
-                    onAdFailedToLoad?(error)
-                    return
-                }
-                
                 self.rewardedAd = ad
                 self.rewardedAd?.fullScreenContentDelegate = self
                 self.rewardedAd?.paidEventHandler = { [weak self] adValue in
-                    guard let self, let rewardedAd = self.rewardedAd else { return }
-                    PaidEventHandlerManager.shared.getPaidEventHandler(
-                        dataPaidEvent: adValue,
-                        typeAds: .rewardAds,
-                        reward: rewardedAd,
-                        adUnit: adUnitID
-                    )
+                    Task { @MainActor [weak self] in
+                        guard let self, let rewardedAd = self.rewardedAd else { return }
+                        PaidEventHandlerManager.shared.getPaidEventHandler(
+                            dataPaidEvent: adValue,
+                            typeAds: .rewardAds,
+                            reward: rewardedAd,
+                            adUnit: adUnitID
+                        )
+                    }
                 }
                 print("rewardedAd ad loaded successfully")
                 onAdLoaded?()
                 
                 // Auto show interstitial after loaded
                 self.showRewardedAdAd()
+            } catch {
+                self.isLoading = false
+                print("Failed to load rewardedAd ad: \(error.localizedDescription)")
+                // Ẩn loading view khi load thất bại
+                LoadingAdViewController.shared.hide()
+                onAdFailedToLoad?(error)
             }
         }
     }

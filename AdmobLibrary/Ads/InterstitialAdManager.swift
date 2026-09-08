@@ -6,19 +6,19 @@
 //
 
 import SwiftUI
-import GoogleMobileAds
-
+@preconcurrency import GoogleMobileAds
 
 // Interstitial Ad Manager
+@MainActor
 class InterstitialAdManager: NSObject, FullScreenContentDelegate {
      var interstitialAd: InterstitialAd?
      var isLoading = false
-     var onAdDismissed: (() -> Void)?
+     var onAdDismissed: (@MainActor @Sendable () -> Void)?
     
     func loadInterstitialAd(adUnitID: String, 
-                            onAdLoaded: (() -> Void)? = nil,
-                            onAdFailedToLoad: ((Error) -> Void)? = nil,
-                            onAdDismissed: (() -> Void)? = nil) {
+                            onAdLoaded: (@MainActor @Sendable () -> Void)? = nil,
+                            onAdFailedToLoad: (@MainActor @Sendable (Error) -> Void)? = nil,
+                            onAdDismissed: (@MainActor @Sendable () -> Void)? = nil) {
         
         guard !isLoading else { return }
         
@@ -40,36 +40,35 @@ class InterstitialAdManager: NSObject, FullScreenContentDelegate {
             ? "ca-app-pub-3940256099942544/4411468910"
             : adUnitID
         
-        InterstitialAd.load(with: adID, request: request) { [weak self] ad, error in
+        Task { @MainActor [weak self] in
             guard let self = self else { return }
-    
-            DispatchQueue.main.async {
+            do {
+                let ad = try await InterstitialAd.load(with: adID, request: request)
                 self.isLoading = false
-                
-                if let error = error {
-                    print("Failed to load interstitial ad: \(error.localizedDescription)")
-                    // Ẩn loading view khi load thất bại
-                    LoadingAdViewController.shared.hide()
-                    onAdFailedToLoad?(error)
-                    return
-                }
-                
                 self.interstitialAd = ad
                 self.interstitialAd?.fullScreenContentDelegate = self
                 self.interstitialAd?.paidEventHandler = { [weak self] adValue in
-                    guard let self, let interstitialAd = self.interstitialAd else { return }
-                    PaidEventHandlerManager.shared.getPaidEventHandler(
-                        dataPaidEvent: adValue,
-                        typeAds: .interAds,
-                        inter: interstitialAd,
-                        adUnit: adUnitID
-                    )
+                    Task { @MainActor [weak self] in
+                        guard let self, let interstitialAd = self.interstitialAd else { return }
+                        PaidEventHandlerManager.shared.getPaidEventHandler(
+                            dataPaidEvent: adValue,
+                            typeAds: .interAds,
+                            inter: interstitialAd,
+                            adUnit: adUnitID
+                        )
+                    }
                 }
                 print("Interstitial ad loaded successfully")
                 onAdLoaded?()
                 
                 // Auto show interstitial after loaded
                 self.showInterstitialAd()
+            } catch {
+                self.isLoading = false
+                print("Failed to load interstitial ad: \(error.localizedDescription)")
+                // Ẩn loading view khi load thất bại
+                LoadingAdViewController.shared.hide()
+                onAdFailedToLoad?(error)
             }
         }
     }

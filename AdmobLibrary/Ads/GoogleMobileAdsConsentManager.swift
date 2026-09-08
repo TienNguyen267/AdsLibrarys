@@ -15,8 +15,8 @@
 //
 
 import Foundation
-import GoogleMobileAds
-import UserMessagingPlatform
+@preconcurrency import GoogleMobileAds
+@preconcurrency import UserMessagingPlatform
 
 /// The Google Mobile Ads SDK provides the User Messaging Platform (Google's
 /// IAB Certified consent management platform) as one solution to capture
@@ -43,7 +43,7 @@ class GoogleMobileAdsConsentManager: NSObject {
 
   /// Helper method to call the UMP SDK methods to request consent information and load/present a
   /// consent form if necessary.
-  func gatherConsent(consentGatheringComplete: @escaping (Error?) -> Void) {
+  func gatherConsent(consentGatheringComplete: @escaping @MainActor @Sendable (Error?) -> Void) {
     let parameters = RequestParameters()
 
     // For testing purposes, you can use UMPDebugGeography to simulate a location.
@@ -57,11 +57,12 @@ class GoogleMobileAdsConsentManager: NSObject {
     ConsentInformation.shared.requestConsentInfoUpdate(with: parameters) {
       requestConsentError in
       // [START_EXCLUDE]
-      guard requestConsentError == nil else {
-        return consentGatheringComplete(requestConsentError)
-      }
-
       Task { @MainActor in
+        if let requestConsentError = requestConsentError {
+          consentGatheringComplete(requestConsentError)
+          return
+        }
+
         do {
           // [START load_and_present_consent_form]
           try await ConsentForm.loadAndPresentIfRequired(from: nil)

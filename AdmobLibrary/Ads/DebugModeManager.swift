@@ -40,7 +40,7 @@
 
 
 import Foundation
-import FirebaseRemoteConfig
+@preconcurrency import FirebaseRemoteConfig
 
 final class DebugModeManager {
     
@@ -58,22 +58,11 @@ final class DebugModeManager {
     /// Combine App Store logic + RemoteConfig logic (từ ngoài truyền vào)
     func configureDebugFlag(
         rcValue: Bool,                     // ⬅️ lấy từ RemoteConfigManager
-        completion: ((Bool) -> Void)? = nil
+        completion: (@MainActor @Sendable (Bool) -> Void)? = nil
     ) {
-        let group = DispatchGroup()
-        
-        var isDebugStoreLogic: Bool = false
-        let isDebugRemoteConfig: Bool = rcValue   // ⬅️ lấy trực tiếp từ caller
-        
-        // 1) Lấy từ App Store
-        group.enter()
-        fetchIsDebugFromAppStore { value in
-            isDebugStoreLogic = value
-            group.leave()
-        }
-        
-        // 2) Combine
-        group.notify(queue: .main) {
+        Task { @MainActor in
+            let isDebugStoreLogic = await self.fetchIsDebugFromAppStore()
+            let isDebugRemoteConfig = rcValue   // ⬅️ lấy trực tiếp từ caller
             let finalDebug = isDebugStoreLogic || isDebugRemoteConfig
             Common.isDebug = finalDebug
             
@@ -97,18 +86,16 @@ final class DebugModeManager {
     ///     * Hoặc currentVersion > storeVersion (bản mới đang chờ duyệt / test)
     /// - isDebug_storeLogic = false nếu:
     ///     * currentVersion <= storeVersion (đang chạy bản đã duyệt hoặc cũ hơn)
-    private func fetchIsDebugFromAppStore(completion: @escaping (Bool) -> Void) {
+    private func fetchIsDebugFromAppStore() async -> Bool {
         guard let bundleId = Bundle.main.bundleIdentifier else {
             print("❌ Không lấy được bundleId")
-            completion(false)
-            return
+            return false
         }
         let timestamp = Int(Date().timeIntervalSince1970)
         
         guard let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(bundleId)&_=\(timestamp)") else {
             print("❌ URL lookup App Store không hợp lệ")
-            completion(false)
-            return
+            return false
         }
         
         let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0"
@@ -117,82 +104,62 @@ final class DebugModeManager {
         var request = URLRequest(url: url)
         request.cachePolicy = .reloadIgnoringLocalCacheData
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            // Error / network fail
-            if let error = error {
-                print("❌ App Store lookup error:", error.localizedDescription)
-                // Không gọi được App Store → coi như chưa có thông tin → cho debug = true cho an toàn dev
-                completion(true)
-                return
+        do {
+            let (data, _) = try await URLSession.shared.data(for: request)
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+            guard
+                let json = jsonObject as? [String: Any],
+                let results = json["results"] as? [[String: Any]]
+            else {
+                print("❌ App Store lookup: JSON format không đúng")
+                return true
             }
             
-            guard let data = data else {
-                print("❌ App Store lookup: no data")
-                // Không có data → tương tự: cho true để không khóa debug khi dev
-                completion(true)
-                return
+            // App chưa có trên store lần nào
+            if results.isEmpty {
+                print("ℹ️ App chưa có trên App Store → isDebug_storeLogic = true")
+                return true
             }
             
-            do {
-                let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-                guard
-                    let json = jsonObject as? [String: Any],
-                    let results = json["results"] as? [[String: Any]]
-                else {
-                    print("❌ App Store lookup: JSON format không đúng")
-                    completion(true)
-                    return
-                }
-                
-                // App chưa có trên store lần nào
-                if results.isEmpty {
-                    print("ℹ️ App chưa có trên App Store → isDebug_storeLogic = true")
-                    completion(true)
-                    return
-                }
-                
-                guard let first = results.first,
-                      let storeVersion = first["version"] as? String
-                else {
-                    print("❌ App Store lookup: không lấy được version")
-                    completion(true)
-                    return
-                }
-                
-                print("ℹ️ App Store version: \(storeVersion)")
-                
-                let compareResult = currentVersion.compare(storeVersion, options: .numeric)
-                
-                let isDebugStoreLogic: Bool
-                
-                switch compareResult {
-                case .orderedDescending:
-                    // currentVersion > storeVersion
-                    // → app đang chạy bản mới hơn bản live (bản mới chờ duyệt / test)
-                    isDebugStoreLogic = true
-                case .orderedSame, .orderedAscending:
-                    // currentVersion == storeVersion  → bản đang live, đã duyệt
-                    // currentVersion < storeVersion   → đang chạy bản cũ hơn (cũng đã từng duyệt)
-                    isDebugStoreLogic = false
-                @unknown default:
-                    isDebugStoreLogic = false
-                }
-                
-                print("📦 isDebug_storeLogic (from App Store logic) = \(isDebugStoreLogic)")
-                completion(isDebugStoreLogic)
-                
-            } catch {
-                print("❌ JSON parse App Store lookup error:", error.localizedDescription)
-                // Parse lỗi → cho true để dev/debug không bị khóa
-                completion(true)
+            guard let first = results.first,
+                  let storeVersion = first["version"] as? String
+            else {
+                print("❌ App Store lookup: không lấy được version")
+                return true
             }
-        }.resume()
+            
+            print("ℹ️ App Store version: \(storeVersion)")
+            
+            let compareResult = currentVersion.compare(storeVersion, options: .numeric)
+            let isDebugStoreLogic: Bool
+            
+            switch compareResult {
+            case .orderedDescending:
+                // currentVersion > storeVersion
+                // → app đang chạy bản mới hơn bản live (bản mới chờ duyệt / test)
+                isDebugStoreLogic = true
+            case .orderedSame, .orderedAscending:
+                // currentVersion == storeVersion  → bản đang live, đã duyệt
+                // currentVersion < storeVersion   → đang chạy bản cũ hơn (cũng đã từng duyệt)
+                isDebugStoreLogic = false
+            @unknown default:
+                isDebugStoreLogic = false
+            }
+            
+            print("📦 isDebug_storeLogic (from App Store logic) = \(isDebugStoreLogic)")
+            return isDebugStoreLogic
+            
+        } catch {
+            print("❌ App Store lookup error:", error.localizedDescription)
+            // Parse lỗi → cho true để dev/debug không bị khóa
+            return true
+        }
     }
     
     // MARK: - Remote Config logic
     
     /// Lấy isDebug từ Remote Config
-    private func fetchIsDebugFromRemoteConfig(completion: @escaping (Bool) -> Void) {
+    private func fetchIsDebugFromRemoteConfig() async -> Bool {
         let rc = RemoteConfig.remoteConfig()
         
         let settings = RemoteConfigSettings()
@@ -209,18 +176,16 @@ final class DebugModeManager {
         ]
         rc.setDefaults(defaults)
         
-        rc.fetchAndActivate { status, error in
-            if let error = error {
-                print("❌ RemoteConfig fetchAndActivate error:", error.localizedDescription)
-                let value = rc["isDebug"].boolValue
-                print("📡 RC isDebug (fallback after error) = \(value)")
-                completion(value)
-                return
-            }
-            
+        do {
+            let status = try await rc.fetchAndActivate()
             let value = rc["isDebug"].boolValue
             print("📡 RC isDebug = \(value), status = \(status.rawValue)")
-            completion(value)
+            return value
+        } catch {
+            print("❌ RemoteConfig fetchAndActivate error:", error.localizedDescription)
+            let value = rc["isDebug"].boolValue
+            print("📡 RC isDebug (fallback after error) = \(value)")
+            return value
         }
     }
 }

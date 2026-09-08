@@ -7,13 +7,16 @@
 
 
 import Foundation
-import GoogleMobileAds
+import UIKit
+@preconcurrency import GoogleMobileAds
 
+@MainActor
 protocol OnResumeManagerDelegate: AnyObject {
     /// Method to be invoked when an app open ad is complete (i.e. dismissed or fails to show).
     func appOpenAdManagerAdDidComplete(_ appOpenAdManager: OnResumeManager)
 }
 
+@MainActor
 class OnResumeManager: NSObject {
     /// Ad references in the app open beta will time out after four hours,
     /// but this time limit may change in future beta versions. For details, see:
@@ -74,23 +77,22 @@ class OnResumeManager: NSObject {
         : adUnitID
         
         print("Start loading On resum ad.")
-        AppOpenAd.load(
-            with: idAOA,
-            request: Request()) { [weak self] ad, error in
-                guard let self = self else { return }
+        Task { @MainActor [weak self] in
+            guard let self = self else { return }
+            do {
+                let ad = try await AppOpenAd.load(with: self.idAOA, request: Request())
                 self.isLoadingAd = false
-                if let error = error {
-                    self.appOpenAd = nil
-                    self.loadTime = nil
-                    print("On resum ad failed to load with error: \(error.localizedDescription).")
-                    return
-                }
-                
                 self.appOpenAd = ad
                 self.appOpenAd?.fullScreenContentDelegate = self
                 self.loadTime = Date()
                 print("On resum ad loaded successfully.")
+            } catch {
+                self.isLoadingAd = false
+                self.appOpenAd = nil
+                self.loadTime = nil
+                print("On resum ad failed to load with error: \(error.localizedDescription).")
             }
+        }
     }
     
     func showAdIfAvailable() {
@@ -126,13 +128,15 @@ class OnResumeManager: NSObject {
             ad.present(from: nil)
             isShowingAd = true
             ad.paidEventHandler = { [weak self] adValue in
-                guard let self, let appOpenAd = self.appOpenAd else { return }
-                PaidEventHandlerManager.shared.getPaidEventHandler(
-                    dataPaidEvent: adValue,
-                    typeAds: .aoa,
-                    aoa: appOpenAd,
-                    adUnit: self.idAOA
-                )
+                Task { @MainActor [weak self] in
+                    guard let self, let appOpenAd = self.appOpenAd else { return }
+                    PaidEventHandlerManager.shared.getPaidEventHandler(
+                        dataPaidEvent: adValue,
+                        typeAds: .aoa,
+                        aoa: appOpenAd,
+                        adUnit: self.idAOA
+                    )
+                }
             }
             
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

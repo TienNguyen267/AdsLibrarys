@@ -17,12 +17,12 @@ class RemoteConfigManager {
         remoteConfig.configSettings = settings
     }
     
-    func initRemoteConfig(defaults: [String: NSObject], onComplete: @escaping () -> Void) {
+    func initRemoteConfig(defaults: [String: NSObject], onComplete: @escaping @MainActor @Sendable () -> Void) {
         // Đặt giá trị mặc định
         remoteConfig.setDefaults(defaults)
         
         // Lắng nghe cập nhật realtime
-        remoteConfig.addOnConfigUpdateListener { update, error in
+        remoteConfig.addOnConfigUpdateListener { [weak self] update, error in
             if let error = error {
                 print("❌ RemoteConfig update error: \(error.localizedDescription)")
                 return
@@ -30,8 +30,12 @@ class RemoteConfigManager {
             guard let update = update else { return }
             
             print("✅ RemoteConfig updated keys: \(update.updatedKeys)")
-            self.remoteConfig.activate { _, _ in
-                onComplete()
+            Task { @MainActor [weak self] in
+                self?.remoteConfig.activate { _, _ in
+                    Task { @MainActor in
+                        onComplete()
+                    }
+                }
             }
         }
         
@@ -44,7 +48,8 @@ class RemoteConfigManager {
             
             if status == .successFetchedFromRemote || status == .successUsingPreFetchedData {
                 print("✅ RemoteConfig fetched and activated")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                Task { @MainActor in
+                    try? await Task.sleep(nanoseconds: 2_000_000_000)
                     onComplete()
                 }
             } else {

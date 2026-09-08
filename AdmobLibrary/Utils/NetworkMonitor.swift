@@ -9,7 +9,10 @@ import Foundation
 import Network
 import Combine
 
-class NetworkMonitor: ObservableObject {
+@MainActor
+final class NetworkMonitor: ObservableObject {
+    static let shared = NetworkMonitor()
+    
     private let monitor = NWPathMonitor()
     private let queue = DispatchQueue(label: "NetworkMonitor")
     
@@ -17,7 +20,7 @@ class NetworkMonitor: ObservableObject {
     
     init() {
         monitor.pathUpdateHandler = { [weak self] path in
-            DispatchQueue.main.async {
+            Task { @MainActor [weak self] in
                 self?.isConnected = path.status == .satisfied
             }
         }
@@ -28,21 +31,25 @@ class NetworkMonitor: ObservableObject {
         monitor.cancel()
     }
     
-    static func checkConnection() -> Bool {
+    nonisolated static func checkConnection() -> Bool {
         let monitor = NWPathMonitor()
         let queue = DispatchQueue(label: "NetworkCheck")
-        var isConnected = false
+        let semaphore = DispatchSemaphore(value: 0)
+        final class ResultBox: @unchecked Sendable {
+            var isConnected = false
+        }
+        let box = ResultBox()
         
         monitor.pathUpdateHandler = { path in
-            isConnected = path.status == .satisfied
+            box.isConnected = path.status == .satisfied
+            semaphore.signal()
         }
         
         monitor.start(queue: queue)
-        // Give it a moment to check
-        Thread.sleep(forTimeInterval: 0.1)
+        _ = semaphore.wait(timeout: .now() + 0.1)
         monitor.cancel()
         
-        return isConnected
+        return box.isConnected
     }
 }
 
