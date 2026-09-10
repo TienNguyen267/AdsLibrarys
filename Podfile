@@ -18,6 +18,7 @@ target 'AdmobLibrary' do
   pod 'FirebaseAnalytics'
   pod 'FirebaseRemoteConfig'
   pod 'FirebaseCrashlytics'
+  pod 'FirebaseMessaging', :modular_headers => true
   pod 'lottie-ios'
 
   # ✅ Fix “does not define modules” when building static / Swift pods

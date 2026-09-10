@@ -1,6 +1,15 @@
 {
-  "originHash" : "fef25bdca91813013e9f62da30996b2504576bc8f5ed9d0a0bb177a563058bf3",
+  "originHash" : "5b8ced9427e39c5ec582d1a403a85ecfbfe5049659f1f1a6c690cac89e6a9f95",
   "pins" : [
+    {
+      "identity" : "facebook-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/facebook/facebook-ios-sdk",
+      "state" : {
+        "branch" : "main",
+        "revision" : "90cff9a39cbd6cb092c9a044400660d695e3075f"
+      }
+    },
     {
       "identity" : "swiftui-shimmer",
       "kind" : "remoteSourceControl",

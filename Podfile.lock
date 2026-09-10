@@ -50,6 +50,15 @@ PODS:
     - GoogleUtilities/Environment (~> 8.1)
     - GoogleUtilities/UserDefaults (~> 8.1)
     - PromisesObjC (~> 2.4)
+  - FirebaseMessaging (12.14.0):
+    - FirebaseCore (~> 12.14.0)
+    - FirebaseInstallations (~> 12.14.0)
+    - GoogleDataTransport (~> 10.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.1)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/Reachability (~> 8.1)
+    - GoogleUtilities/UserDefaults (~> 8.1)
+    - nanopb (~> 3.30910.0)
   - FirebaseRemoteConfig (12.14.0):
     - FirebaseABTesting (~> 12.14.0)
     - FirebaseCore (~> 12.14.0)
@@ -215,6 +224,7 @@ DEPENDENCIES:
   - FirebaseAnalytics
   - FirebaseCore
   - FirebaseCrashlytics
+  - FirebaseMessaging
   - FirebaseRemoteConfig
   - Google-Mobile-Ads-SDK (~> 13.0)
   - GoogleDataTransport
@@ -243,6 +253,7 @@ SPEC REPOS:
     - FirebaseCoreInternal
     - FirebaseCrashlytics
     - FirebaseInstallations
+    - FirebaseMessaging
     - FirebaseRemoteConfig
     - FirebaseRemoteConfigInterop
     - FirebaseSessions
@@ -283,6 +294,7 @@ SPEC CHECKSUMS:
   FirebaseCoreInternal: 090369a5fffd7423cf88006ab4d2ccc2173a8db9
   FirebaseCrashlytics: 1fabfdca902d0706cb51bf839edb58b45db421ff
   FirebaseInstallations: 7cdc919e29dc54306edeffdbdc1eed1a40d7d1e7
+  FirebaseMessaging: 4803888ce3002188f24e19faa8d2326261538426
   FirebaseRemoteConfig: 9b6476d8426c30db511733621b3e969461a99094
   FirebaseRemoteConfigInterop: 40ecdce5a4feee7643b81342f32f1cded905bb07
   FirebaseSessions: c9e7b7829265454f08cb68f7f8a6650c9b221bd4
@@ -312,6 +324,6 @@ SPEC CHECKSUMS:
   UnityAds: 07379b63b1044dcad98b3092319166fd6f2cfda4
   VungleAds: 77bad219e9e4b34bf43ab2518bf2fac72b86100b
 
-PODFILE CHECKSUM: 8a74ecd37a22f2a1a84092b2d88b2109a068dab4
+PODFILE CHECKSUM: a1c151aea5106ff2bf38d6a3b9c328ecf6f4ecd4
 
 COCOAPODS: 1.16.2

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AppTrackingTransparency
+import UserNotifications
 
 struct ContentView: View {
     
@@ -16,6 +18,10 @@ struct ContentView: View {
     @State private var showNetworkAlert = false
     @State private var showAdFailedAlert = false
     private let rewardedInterstitialManager = RewardAdManager()
+    
+    @State private var hasRequestedATT = false
+    @State private var hasRequestedNotification = false
+    @State private var isViewAppeared = false
     
     var body: some View {
         NavigationStack {
@@ -89,6 +95,77 @@ struct ContentView: View {
                 }
             } message: {
                 Text("home.ad_failed_message".localized())
+            }
+            .onAppear {
+                if !isViewAppeared {
+                    isViewAppeared = true
+                    requestATTrackingPermission()
+                }
+            }
+        }
+    }
+    
+    
+    // MARK: - ATT Permission
+    private func requestATTrackingPermission() {
+        guard !hasRequestedATT else {
+            print("🚫 ATT already requested, skipping...")
+            return
+        }
+
+        // Check current ATT status first
+        let currentStatus = ATTrackingManager.trackingAuthorizationStatus
+        print("🔍 Current ATT status: \(currentStatus.rawValue)")
+
+        // Only request if status is notDetermined
+        guard currentStatus == .notDetermined else {
+            print("⚠️ ATT status is not notDetermined, skipping request")
+            hasRequestedATT = true
+            return
+        }
+
+        print("⏰ Requesting ATT permission in 2 seconds...")
+        print("🚀 Requesting ATT permission now...")
+        ATTrackingManager.requestTrackingAuthorization { status in
+            DispatchQueue.main.async {
+                self.hasRequestedATT = true
+                requestNotificationPermission()
+                switch status {
+                case .authorized:
+                    print("✅ ATT permission granted")
+                case .denied:
+                    print("❌ ATT permission denied")
+                case .restricted:
+                    print("⚠️ ATT permission restricted")
+                case .notDetermined:
+                    print("❓ ATT permission not determined")
+                @unknown default:
+                    print("❓ ATT permission unknown status")
+                }
+            }
+        }
+    }
+
+    // MARK: - Notification Permission
+    /// Gọi sau ATT (delay) để không đụng 2 system alert cùng lúc.
+    private func requestNotificationPermission() {
+        guard !hasRequestedNotification else { return }
+
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            // Extract value here — UNNotificationSettings isn't Sendable
+            let status = settings.authorizationStatus
+            DispatchQueue.main.async {
+                guard status == .notDetermined else {
+                    self.hasRequestedNotification = true
+                    return
+                }
+
+                // Đợi ATT dialog xong (~1.5s) rồi mới hỏi notification
+                UNUserNotificationCenter.current().requestAuthorization(
+                    options: [.alert, .badge, .sound]
+                ) { granted, error in
+                    print("Notification permission: \(granted)")
+                }
             }
         }
     }

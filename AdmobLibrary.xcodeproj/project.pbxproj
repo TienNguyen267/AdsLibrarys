@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		385A5C453052B5F000677360 /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = 385A5C443052B5F000677360 /* FacebookAEM */; };
+		385A5C473052B5F000677360 /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 385A5C463052B5F000677360 /* FacebookBasics */; };
+		385A5C493052B5F000677360 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 385A5C483052B5F000677360 /* FacebookCore */; };
+		385A5C4B3052B5F000677360 /* FacebookGamingServices in Frameworks */ = {isa = PBXBuildFile; productRef = 385A5C4A3052B5F000677360 /* FacebookGamingServices */; };
+		385A5C4D3052B5F000677360 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 385A5C4C3052B5F000677360 /* FacebookLogin */; };
+		385A5C4F3052B5F000677360 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 385A5C4E3052B5F000677360 /* FacebookShare */; };
 		388FA9DC2FFDF69400BEAD80 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 388FA9DB2FFDF69400BEAD80 /* Shimmer */; };
 		BB6889D043856634D28E7FDF /* libPods-AdmobLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D06F71A85FA86494D1380790 /* libPods-AdmobLibrary.a */; };
 /* End PBXBuildFile section */
@@ -44,7 +50,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				385A5C453052B5F000677360 /* FacebookAEM in Frameworks */,
+				385A5C493052B5F000677360 /* FacebookCore in Frameworks */,
+				385A5C4F3052B5F000677360 /* FacebookShare in Frameworks */,
+				385A5C473052B5F000677360 /* FacebookBasics in Frameworks */,
+				385A5C4B3052B5F000677360 /* FacebookGamingServices in Frameworks */,
 				388FA9DC2FFDF69400BEAD80 /* Shimmer in Frameworks */,
+				385A5C4D3052B5F000677360 /* FacebookLogin in Frameworks */,
 				BB6889D043856634D28E7FDF /* libPods-AdmobLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +151,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				388FA9DA2FFDF69400BEAD80 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				385A5C433052B5F000677360 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 388FA8EB2FFDF38F00BEAD80 /* Products */;
@@ -455,6 +468,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		385A5C433052B5F000677360 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		388FA9DA2FFDF69400BEAD80 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
@@ -466,6 +487,36 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		385A5C443052B5F000677360 /* FacebookAEM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385A5C433052B5F000677360 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookAEM;
+		};
+		385A5C463052B5F000677360 /* FacebookBasics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385A5C433052B5F000677360 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookBasics;
+		};
+		385A5C483052B5F000677360 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385A5C433052B5F000677360 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		385A5C4A3052B5F000677360 /* FacebookGamingServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385A5C433052B5F000677360 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookGamingServices;
+		};
+		385A5C4C3052B5F000677360 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385A5C433052B5F000677360 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		385A5C4E3052B5F000677360 /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 385A5C433052B5F000677360 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
+		};
 		388FA9DB2FFDF69400BEAD80 /* Shimmer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 388FA9DA2FFDF69400BEAD80 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
