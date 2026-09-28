@@ -86,6 +86,14 @@ struct ContentView: View {
             .navigationDestination(isPresented: $isNextScreen) {
                 SwiftUIView()
             }
+            .alert("home.no_internet".localized(), isPresented: $showNetworkAlert) {
+                      Button("home.ok".localized(), role: .cancel) {
+                          showNetworkAlert = false
+                          showWiFiInstruction()
+                      }
+                  } message: {
+                      Text("home.no_internet_message".localized())
+                  }
             .alert("home.ad_failed_title".localized(), isPresented: $showAdFailedAlert) {
                 Button("home.try_again".localized()) {
                     showAdFailedAlert = false
