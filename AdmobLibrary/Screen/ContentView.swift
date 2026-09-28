@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AdmobLibrary
 import AppTrackingTransparency
 import UserNotifications
 

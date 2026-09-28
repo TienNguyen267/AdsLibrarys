@@ -2,7 +2,7 @@
 //  SplashView.swift
 
 import SwiftUI
-import Lottie
+import AdmobLibrary
 
 struct SplashView: View {
     @State private var showLanguageView = false

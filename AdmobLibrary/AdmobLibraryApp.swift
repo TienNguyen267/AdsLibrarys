@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import AdmobLibrary
 import FirebaseCore
 import FirebaseAnalytics
 import FacebookCore

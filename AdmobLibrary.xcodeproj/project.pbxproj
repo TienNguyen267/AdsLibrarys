@@ -14,14 +14,14 @@
 		385A5C4D3052B5F000677360 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 385A5C4C3052B5F000677360 /* FacebookLogin */; };
 		385A5C4F3052B5F000677360 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 385A5C4E3052B5F000677360 /* FacebookShare */; };
 		388FA9DC2FFDF69400BEAD80 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 388FA9DB2FFDF69400BEAD80 /* Shimmer */; };
-		BB6889D043856634D28E7FDF /* libPods-AdmobLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D06F71A85FA86494D1380790 /* libPods-AdmobLibrary.a */; };
+		E0BD30529F433D30830C651D /* Pods_AdmobLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 297ECA311E22B1ED37371482 /* Pods_AdmobLibrary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		297ECA311E22B1ED37371482 /* Pods_AdmobLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdmobLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32ACA36ECDA35AF3554B4CF1 /* Pods-AdmobLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdmobLibrary.release.xcconfig"; path = "Target Support Files/Pods-AdmobLibrary/Pods-AdmobLibrary.release.xcconfig"; sourceTree = "<group>"; };
 		388FA8EA2FFDF38F00BEAD80 /* AdmobLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdmobLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		916DEF2613E8913F9376DDEF /* Pods-AdmobLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdmobLibrary.debug.xcconfig"; path = "Target Support Files/Pods-AdmobLibrary/Pods-AdmobLibrary.debug.xcconfig"; sourceTree = "<group>"; };
-		D06F71A85FA86494D1380790 /* libPods-AdmobLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AdmobLibrary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -57,7 +57,7 @@
 				385A5C4B3052B5F000677360 /* FacebookGamingServices in Frameworks */,
 				388FA9DC2FFDF69400BEAD80 /* Shimmer in Frameworks */,
 				385A5C4D3052B5F000677360 /* FacebookLogin in Frameworks */,
-				BB6889D043856634D28E7FDF /* libPods-AdmobLibrary.a in Frameworks */,
+				E0BD30529F433D30830C651D /* Pods_AdmobLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +94,7 @@
 		B69D8275C551BF5E41792A84 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D06F71A85FA86494D1380790 /* libPods-AdmobLibrary.a */,
+				297ECA311E22B1ED37371482 /* Pods_AdmobLibrary.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -385,6 +385,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AdmobLibrary/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "this is dcmmmm";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -396,12 +398,12 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dk.com.AdmobLibrary;
+				PRODUCT_MODULE_NAME = AdmobLibraryDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "AdmobLibrary/AdmobLibrary-Bridging-Header.h";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -421,6 +423,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AdmobLibrary/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "this is dcmmmm";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -432,12 +436,12 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dk.com.AdmobLibrary;
+				PRODUCT_MODULE_NAME = AdmobLibraryDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "AdmobLibrary/AdmobLibrary-Bridging-Header.h";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
