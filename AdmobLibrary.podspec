@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'AdmobLibrary'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'Reusable AdMob views and managers for SwiftUI apps.'
   s.description      = 'Banner, native, interstitial, rewarded, and app-open ads, with Firebase Remote Config and mediation adapters.'
   s.homepage         = 'https://github.com/TienNguyen267/AdsLibrarys'
