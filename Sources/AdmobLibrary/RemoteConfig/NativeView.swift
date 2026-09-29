@@ -17,49 +17,54 @@ public func nativeView(
 ) -> some View {
     
     if let native = RemoteConfigManager.shared.getValue(forKey: configKey, as: NativePreloadConfig.self) {
-        switch native.type {
-        case "1":
-            NativeAdContainer(
-                adUnitID: native.units.native,
-                onAdLoaded: { _ in onAdLoaded?() },
-                onAdFailedToLoad: onAdFailedToLoad
-            )
-            .ignoresSafeArea()
-            .frame(maxWidth: .infinity)
-            .background(Color.white)
-
-        case "2":
-            NativeSmallPlayAdContainer(
-                adUnitID: native.units.native,
-                onAdLoaded: { _ in onAdLoaded?() },
-                onAdFailedToLoad: onAdFailedToLoad
-            )
-            .ignoresSafeArea()
-            .frame(maxWidth: .infinity)
-            .background(Color.white)
-
-        case "3":
-            NativeSmallBannerAdContainer(
-                adUnitID: native.units.native,
-                onAdLoaded: { _ in onAdLoaded?() },
-                onAdFailedToLoad: onAdFailedToLoad
-            )
-            .ignoresSafeArea()
-            .frame(maxWidth: .infinity)
-            .background(Color.white)
-
-        case "4":
-            NativeCollapAdContainer(
-                adUnitID: native.units.native,
-                onAdLoaded: { _ in onAdLoaded?() },
-                onAdFailedToLoad: onAdFailedToLoad
-            )
-            .ignoresSafeArea()
-            .frame(maxWidth: .infinity)
-            .background(Color.white)
-
-        default:
+        
+        if native.organic && Common.isOrganic {
             EmptyView()
+        } else {
+            switch native.type {
+            case "1":
+                NativeAdContainer(
+                    adUnitID: native.units.native,
+                    onAdLoaded: { _ in onAdLoaded?() },
+                    onAdFailedToLoad: onAdFailedToLoad
+                )
+                .ignoresSafeArea()
+                .frame(maxWidth: .infinity)
+                .background(Color.white)
+
+            case "2":
+                NativeSmallPlayAdContainer(
+                    adUnitID: native.units.native,
+                    onAdLoaded: { _ in onAdLoaded?() },
+                    onAdFailedToLoad: onAdFailedToLoad
+                )
+                .ignoresSafeArea()
+                .frame(maxWidth: .infinity)
+                .background(Color.white)
+
+            case "3":
+                NativeSmallBannerAdContainer(
+                    adUnitID: native.units.native,
+                    onAdLoaded: { _ in onAdLoaded?() },
+                    onAdFailedToLoad: onAdFailedToLoad
+                )
+                .ignoresSafeArea()
+                .frame(maxWidth: .infinity)
+                .background(Color.white)
+
+            case "4":
+                NativeCollapAdContainer(
+                    adUnitID: native.units.native,
+                    onAdLoaded: { _ in onAdLoaded?() },
+                    onAdFailedToLoad: onAdFailedToLoad
+                )
+                .ignoresSafeArea()
+                .frame(maxWidth: .infinity)
+                .background(Color.white)
+
+            default:
+                EmptyView()
+            }
         }
     } else {
         EmptyView()

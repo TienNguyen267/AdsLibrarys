@@ -31,11 +31,9 @@ public class RemoteConfigManager {
             
             print("✅ RemoteConfig updated keys: \(update.updatedKeys)")
             Task { @MainActor [weak self] in
-                self?.remoteConfig.activate { _, _ in
-                    Task { @MainActor in
-                        onComplete()
-                    }
-                }
+                guard let self else { return }
+                _ = try? await remoteConfig.activate()
+                onComplete()
             }
         }
         

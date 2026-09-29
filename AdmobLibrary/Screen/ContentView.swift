@@ -29,34 +29,36 @@ struct ContentView: View {
             ZStack {
                 
                 
-                Text("Hello, world!")
-                    .onTapGesture {
-                        isNextScreen = true
-                    }
-                
-                Text("Show Reward")
-                    .onTapGesture {
-                        if NetworkMonitor.checkConnection() {
-                            rewardedInterstitialManager.loadRewardedAdAd(
-                                adUnitID: "",
-                                onAdLoaded: {
-                                    print("Quảng cáo đã load xong!")
-                                },
-                                onAdFailedToLoad: { error in
-                                    print("Load quảng cáo thất bại: \(error.localizedDescription)")
-                                    showAdFailedAlert = true
-                                },
-                                onAdDismissed: { isGranted in
-                                    if isGranted {
-                                        DispatchQueue.main.async {
-                                           
-                                        }
-                                    }
-                                })
-                        } else {
-                            showNetworkAlert = true
+                VStack {
+                    Text("Hello, world!")
+                        .onTapGesture {
+                            isNextScreen = true
                         }
-                    }
+                    
+                    Text("Show Reward")
+                        .onTapGesture {
+                            if NetworkMonitor.checkConnection() {
+                                rewardedInterstitialManager.loadRewardedAdAd(
+                                    adUnitID: "",
+                                    onAdLoaded: {
+                                        print("Quảng cáo đã load xong!")
+                                    },
+                                    onAdFailedToLoad: { error in
+                                        print("Load quảng cáo thất bại: \(error.localizedDescription)")
+                                        showAdFailedAlert = true
+                                    },
+                                    onAdDismissed: { isGranted in
+                                        if isGranted {
+                                            DispatchQueue.main.async {
+                                               
+                                            }
+                                        }
+                                    })
+                            } else {
+                                showNetworkAlert = true
+                            }
+                        }
+                }
                 
                 VStack {
                     Spacer()

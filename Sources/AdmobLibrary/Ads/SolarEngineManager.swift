@@ -27,6 +27,7 @@ final public class SolarEngineManager {
         SolarEngineSDK.sharedInstance().setAttributionCallback { code, attributionData in
             if code == 0 {
                 print("⚙️ attributionData: \(String(describing: attributionData))")
+                Common.isOrganic = self.checkOrganic(attributionData)
             } else {
                 print("⚙️ code: \(code)")
             }
@@ -37,5 +38,18 @@ final public class SolarEngineManager {
         
         SolarEngineSDK.sharedInstance().preInit(withAppKey: key)
         SolarEngineSDK.sharedInstance().start(withAppKey: key, config: config)
+    }
+    
+    func checkOrganic(_ data: [AnyHashable: Any]?) -> Bool {
+        guard let data = data else {
+            return false
+        }
+
+        let channelName = (data["channel_name"] as? String ?? "").lowercased()
+        let channelId = data["channel_id"] as? String
+
+        let isOrganic = channelName == "organic" || channelId == "-1"
+
+        return isOrganic
     }
 }

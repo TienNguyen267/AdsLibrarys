@@ -17,80 +17,85 @@ public func adsBannerNativeView(
     onAdFailedToLoad: ((Error) -> Void)? = nil
 ) -> some View {
     if let banner = RemoteConfigManager.shared.getValue(forKey: configKey, as: BannerNativeConfig.self) {
-        switch banner.adsType {
-        case "1":
-            BannerAdViewWithShimmer(
-                adUnitID: banner.units.banner,
-                onAdLoaded: onAdLoaded,
-                onAdFailedToLoad: onAdFailedToLoad
-            )
-
-        case "2":
-            BannerCollapsibleAdView(
-                adUnitID: banner.units.bannerCollap,
-                onAdLoaded: onAdLoaded,
-                onAdFailedToLoad: onAdFailedToLoad
-            )
-
-        case "3":
-            switch banner.nativeType {
+        if banner.organic && Common.isOrganic {
+            EmptyView()
+        } else {
+            switch banner.adsType {
             case "1":
-                NativeAdContainer(
-                    adUnitID: banner.units.native,
-                    onAdLoaded: { _ in onAdLoaded?() },
+                BannerAdViewWithShimmer(
+                    adUnitID: banner.units.banner,
+                    onAdLoaded: onAdLoaded,
                     onAdFailedToLoad: onAdFailedToLoad
                 )
-                .ignoresSafeArea()
-                .frame(maxWidth: .infinity)
-                .background(Color.white)
 
             case "2":
-                NativeSmallPlayAdContainer(
-                    adUnitID: banner.units.native,
-                    onAdLoaded: { _ in onAdLoaded?() },
+                BannerCollapsibleAdView(
+                    adUnitID: banner.units.bannerCollap,
+                    onAdLoaded: onAdLoaded,
                     onAdFailedToLoad: onAdFailedToLoad
                 )
-                .ignoresSafeArea()
-                .frame(maxWidth: .infinity)
-                .background(Color.white)
 
             case "3":
-                NativeSmallBannerAdContainer(
-                    adUnitID: banner.units.native,
-                    onAdLoaded: { _ in onAdLoaded?() },
-                    onAdFailedToLoad: onAdFailedToLoad
-                )
-                .ignoresSafeArea()
-                .frame(maxWidth: .infinity)
-                .background(Color.white)
+                switch banner.nativeType {
+                case "1":
+                    NativeAdContainer(
+                        adUnitID: banner.units.native,
+                        onAdLoaded: { _ in onAdLoaded?() },
+                        onAdFailedToLoad: onAdFailedToLoad
+                    )
+                    .ignoresSafeArea()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.white)
 
-            case "4":
-                Group {
-                    if isClose {
-                        NativeCollapCloseAdContainer(
-                            adUnitID: banner.units.native,
-                            onAdLoaded: { _ in onAdLoaded?() },
-                            onAdFailedToLoad: onAdFailedToLoad
-                        )
-                    } else {
-                        NativeCollapAdContainer(
-                            adUnitID: banner.units.native,
-                            onAdLoaded: { _ in onAdLoaded?() },
-                            onAdFailedToLoad: onAdFailedToLoad
-                        )
+                case "2":
+                    NativeSmallPlayAdContainer(
+                        adUnitID: banner.units.native,
+                        onAdLoaded: { _ in onAdLoaded?() },
+                        onAdFailedToLoad: onAdFailedToLoad
+                    )
+                    .ignoresSafeArea()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.white)
+
+                case "3":
+                    NativeSmallBannerAdContainer(
+                        adUnitID: banner.units.native,
+                        onAdLoaded: { _ in onAdLoaded?() },
+                        onAdFailedToLoad: onAdFailedToLoad
+                    )
+                    .ignoresSafeArea()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.white)
+
+                case "4":
+                    Group {
+                        if isClose {
+                            NativeCollapCloseAdContainer(
+                                adUnitID: banner.units.native,
+                                onAdLoaded: { _ in onAdLoaded?() },
+                                onAdFailedToLoad: onAdFailedToLoad
+                            )
+                        } else {
+                            NativeCollapAdContainer(
+                                adUnitID: banner.units.native,
+                                onAdLoaded: { _ in onAdLoaded?() },
+                                onAdFailedToLoad: onAdFailedToLoad
+                            )
+                        }
                     }
+                    .ignoresSafeArea()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.white)
+
+                default:
+                    EmptyView()
                 }
-                .ignoresSafeArea()
-                .frame(maxWidth: .infinity)
-                .background(Color.white)
 
             default:
                 EmptyView()
             }
-
-        default:
-            EmptyView()
         }
+        
     } else {
         EmptyView()
     }

@@ -29,100 +29,104 @@ private struct AdsSplashContainerView: View {
     private var splashContent: some View {
         if let splash = RemoteConfigManager.shared.getValue(forKey: "ADS_SPLASH", as: SplashConfig.self) {
 
-            switch splash.bannerSplash {
+            if splash.organic && Common.isOrganic {
+                Color.clear
+            } else {
+                switch splash.bannerSplash {
 
-            case "1" :
-                BannerAdViewWithShimmer(
-                    adUnitID: splash.units.banner,
-                    onAdLoaded: {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                            print("✅ Load Inter sau 2 giây")
+                case "1" :
+                    BannerAdViewWithShimmer(
+                        adUnitID: splash.units.banner,
+                        onAdLoaded: {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                print("✅ Load Inter sau 2 giây")
+                                loadAD(splash: splash)
+                            }
+                        },
+                        onAdFailedToLoad: { error in
                             loadAD(splash: splash)
                         }
-                    },
-                    onAdFailedToLoad: { error in
-                        loadAD(splash: splash)
+                    )
+
+                case "2" :
+                    switch splash.nativeType {
+                    case "1":
+                        NativeAdContainer(
+                            adUnitID: splash.units.native,
+                            onAdLoaded: { nativeAd in
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    print("✅ Load Inter sau 2 giây")
+                                    loadAD(splash: splash)
+                                }
+                            },
+                            onAdFailedToLoad: { error in
+                                loadAD(splash: splash)
+                            }
+                        )
+                        .ignoresSafeArea()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.white)
+
+                    case "2":
+                        NativeSmallPlayAdContainer(
+                            adUnitID: splash.units.native,
+                            onAdLoaded: { nativeAd in
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    print("✅ Load Inter sau 2 giây")
+                                    loadAD(splash: splash)
+                                }
+                            },
+                            onAdFailedToLoad: { error in
+                                loadAD(splash: splash)
+                            }
+                        )
+                        .ignoresSafeArea()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.white)
+
+                    case "3":
+                        NativeSmallBannerAdContainer(
+                            adUnitID: splash.units.native,
+                            onAdLoaded: { nativeAd in
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    print("✅ Load Inter sau 2 giây")
+                                    loadAD(splash: splash)
+                                }
+                            },
+                            onAdFailedToLoad: { error in
+                                loadAD(splash: splash)
+                            }
+                        )
+                        .ignoresSafeArea()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.white)
+
+                    case "4":
+                        NativeCollapAdContainer(
+                            adUnitID: splash.units.native,
+                            onAdLoaded: { nativeAd in
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    print("✅ Load Inter sau 2 giây")
+                                    loadAD(splash: splash)
+                                }
+                            },
+                            onAdFailedToLoad: { error in
+                                loadAD(splash: splash)
+                            }
+                        )
+                        .ignoresSafeArea()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.white)
+                    default :
+                        Color.clear.onAppear {
+                            loadAD(splash: splash)
+                        }
                     }
-                )
 
-            case "2" :
-                switch splash.nativeType {
-                case "1":
-                    NativeAdContainer(
-                        adUnitID: splash.units.native,
-                        onAdLoaded: { nativeAd in
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                print("✅ Load Inter sau 2 giây")
-                                loadAD(splash: splash)
-                            }
-                        },
-                        onAdFailedToLoad: { error in
-                            loadAD(splash: splash)
-                        }
-                    )
-                    .ignoresSafeArea()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.white)
-
-                case "2":
-                    NativeSmallPlayAdContainer(
-                        adUnitID: splash.units.native,
-                        onAdLoaded: { nativeAd in
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                print("✅ Load Inter sau 2 giây")
-                                loadAD(splash: splash)
-                            }
-                        },
-                        onAdFailedToLoad: { error in
-                            loadAD(splash: splash)
-                        }
-                    )
-                    .ignoresSafeArea()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.white)
-
-                case "3":
-                    NativeSmallBannerAdContainer(
-                        adUnitID: splash.units.native,
-                        onAdLoaded: { nativeAd in
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                print("✅ Load Inter sau 2 giây")
-                                loadAD(splash: splash)
-                            }
-                        },
-                        onAdFailedToLoad: { error in
-                            loadAD(splash: splash)
-                        }
-                    )
-                    .ignoresSafeArea()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.white)
-
-                case "4":
-                    NativeCollapAdContainer(
-                        adUnitID: splash.units.native,
-                        onAdLoaded: { nativeAd in
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                print("✅ Load Inter sau 2 giây")
-                                loadAD(splash: splash)
-                            }
-                        },
-                        onAdFailedToLoad: { error in
-                            loadAD(splash: splash)
-                        }
-                    )
-                    .ignoresSafeArea()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.white)
                 default :
                     Color.clear.onAppear {
                         loadAD(splash: splash)
                     }
-                }
-
-            default :
-                Color.clear.onAppear {
-                    loadAD(splash: splash)
                 }
             }
 

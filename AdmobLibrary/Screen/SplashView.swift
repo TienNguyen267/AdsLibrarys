@@ -114,6 +114,7 @@ struct SplashView: View {
                     Common.checkTestAds = RemoteConfigManager.shared.getValue(forKey: "checkTestAds") == "1"
                     
                     TenjinManager.shared.initialize(sdkKey: "")
+                    SolarEngineManager.shared.setupSolarEngine(key: "")
             
             
                     DebugModeManager.shared.configureDebugFlag(rcValue: isDebugFirebase) { isDebug in

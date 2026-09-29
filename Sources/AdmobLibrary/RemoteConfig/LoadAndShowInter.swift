@@ -54,6 +54,13 @@ final public class InterAdRunner {
 
         if let inter = RemoteConfigManager.shared.getValue(forKey: key, as: InterConfig.self) {
 
+            
+            if inter.organic && Common.isOrganic {
+                print("⏭️ Là Organic - Bỏ qua")
+                onAdDismiss()
+                return
+            }
+            
             // count = số lần cách nhau giữa 2 quảng cáo (frequency capping)
             // Lần đầu tiên hiển thị ngay, sau đó cứ cách `count` lần mới hiển thị lại.
             // Bộ đếm chỉ giữ trong bộ nhớ -> kill app là reset lại
