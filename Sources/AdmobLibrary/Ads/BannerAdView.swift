@@ -58,6 +58,7 @@ private struct BannerAdView: UIViewRepresentable {
     
     public func updateUIView(_ uiView: BannerView, context: Context) {
         // No update needed
+        
     }
     
     public func makeCoordinator() -> BannerCoordinator {
