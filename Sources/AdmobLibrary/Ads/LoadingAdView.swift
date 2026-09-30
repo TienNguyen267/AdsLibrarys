@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Lottie
+internal import Lottie
 
 public struct LoadingAdView: View {
     public var body: some View {

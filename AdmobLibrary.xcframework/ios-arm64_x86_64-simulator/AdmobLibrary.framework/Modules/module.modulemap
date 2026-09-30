@@ -1,0 +1,10 @@
+framework module AdmobLibrary {
+  umbrella header "AdmobLibrary-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module AdmobLibrary.Swift {
+  header "AdmobLibrary-Swift.h"
+}

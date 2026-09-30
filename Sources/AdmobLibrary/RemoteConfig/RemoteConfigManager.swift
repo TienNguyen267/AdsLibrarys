@@ -5,7 +5,7 @@
 //  Created by Tien Nguyen on 14/10/25.
 //
 import Foundation
-import FirebaseRemoteConfig
+internal import FirebaseRemoteConfig
 
 public class RemoteConfigManager {
     static public let shared = RemoteConfigManager()

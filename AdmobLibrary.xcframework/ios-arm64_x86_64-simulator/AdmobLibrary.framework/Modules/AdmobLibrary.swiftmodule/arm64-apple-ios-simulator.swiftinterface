@@ -1,0 +1,885 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)
+// swift-module-flags: -target arm64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -language-mode 6 -O -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -module-name AdmobLibrary
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
+import AVFoundation
+@_exported import AdmobLibrary
+import Combine
+import Foundation
+@preconcurrency import GoogleMobileAds
+import Network
+import SolarEngineSDK
+import Swift
+import SwiftUI
+import TenjinSDK
+import UIKit
+@preconcurrency import UserMessagingPlatform
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_Concurrency::MainActor public enum AdmobLibraryAssets {
+  @_Concurrency::MainActor public static var bundle: Foundation::Bundle
+  @_Concurrency::MainActor public static func image(named name: Swift::String) -> UIKit::UIImage?
+}
+@_Concurrency::MainActor public func adsBannerNativeView(configKey: Swift::String, isClose: Swift::Bool = false, onAdLoaded: (() -> Swift::Void)? = nil, onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)? = nil) -> some SwiftUICore::View
+
+@_hasMissingDesignatedInitializers @_Concurrency::MainActor final public class AdsManager {
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::AdsManager
+  @_Concurrency::MainActor final public var isShowingAd: Swift::Bool
+  @objc @_Concurrency::MainActor deinit
+}
+@_Concurrency::MainActor public func adsSplashView(onAdDismiss: @escaping () -> Swift::Void) -> some SwiftUICore::View
+
+@_hasMissingDesignatedInitializers @_Concurrency::MainActor final public class NativeFullScreenAdPresenter {
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::NativeFullScreenAdPresenter
+  @_Concurrency::MainActor final public func show(nativeAdManager: AdmobLibrary::NativeAdFullScreenManager, onClose: @escaping () -> Swift::Void)
+  @_Concurrency::MainActor final public func hide()
+  @objc @_Concurrency::MainActor deinit
+}
+@_Concurrency::MainActor public protocol AppOpenAdManagerDelegate : AnyObject {
+  @_Concurrency::MainActor func appOpenAdManagerAdDidComplete(_ appOpenAdManager: AdmobLibrary::AppOpenAdManager)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor public class AppOpenAdManager : ObjectiveC::NSObject {
+  @_Concurrency::MainActor public var appOpenAd: GoogleMobileAds::AppOpenAd?
+  @_Concurrency::MainActor weak public var appOpenAdManagerDelegate: (any AdmobLibrary::AppOpenAdManagerDelegate)?
+  @_Concurrency::MainActor public var isLoadingAd: Swift::Bool
+  @_Concurrency::MainActor public var isShowingAd: Swift::Bool
+  @_Concurrency::MainActor public var loadTime: Foundation::Date?
+  @_Concurrency::MainActor final public let timeoutInterval: Swift::Double
+  @_Concurrency::MainActor public var overlayView: UIKit::UIView?
+  @_Concurrency::MainActor public var onAdDismissed: (() -> Swift::Void)?
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::AppOpenAdManager
+  @_Concurrency::MainActor public func loadAOA(adUnitID: Swift::String, onAdDismissed: (() -> Swift::Void)? = nil) async
+  @_Concurrency::MainActor public func showAdIfAvailable()
+  @_Concurrency::MainActor @objc override dynamic public init()
+  @objc @_Concurrency::MainActor deinit
+}
+extension AdmobLibrary::AppOpenAdManager : GoogleMobileAds::FullScreenContentDelegate {
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func adDidRecordImpression(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func adDidRecordClick(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func adWillDismissFullScreenContent(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func adWillPresentFullScreenContent(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func adDidDismissFullScreenContent(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func ad(_ ad: any GoogleMobileAds::FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Swift::Error)
+}
+@_Concurrency::MainActor @preconcurrency public struct ShimmerView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary11ShimmerViewV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct BannerAdViewWithShimmer : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var adUnitID: Swift::String
+  @_Concurrency::MainActor @preconcurrency public var onAdLoaded: (() -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public var onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public init(adUnitID: Swift::String, onAdLoaded: (() -> Swift::Void)? = nil, onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary23BannerAdViewWithShimmerV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct BannerCollapsibleAdView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var adUnitID: Swift::String
+  @_Concurrency::MainActor @preconcurrency public var onAdLoaded: (() -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public var onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public init(adUnitID: Swift::String, onAdLoaded: (() -> Swift::Void)? = nil, onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary23BannerCollapsibleAdViewV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct BannerAdViewHeightModifier : SwiftUICore::ViewModifier {
+  @_Concurrency::MainActor @preconcurrency public func body(content: AdmobLibrary::BannerAdViewHeightModifier.SwiftUICore::Content) -> some SwiftUICore::View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary26BannerAdViewHeightModifierV4body7contentQr7SwiftUI01_eG8_ContentVyACG_tF", 0) __
+}
+extension SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public func bannerAdHeight() -> some SwiftUICore::View
+  
+}
+@_hasMissingDesignatedInitializers @_Concurrency::MainActor public class Common {
+  @_Concurrency::MainActor public static var isTestDevice: Swift::Bool
+  @_Concurrency::MainActor public static var isDebug: Swift::Bool
+  @_Concurrency::MainActor public static var checkTestAds: Swift::Bool
+  @_Concurrency::MainActor public static var isOrganic: Swift::Bool
+  @_Concurrency::MainActor public static var native_full_intro_2: Swift::String
+  @_Concurrency::MainActor public static var native_full_intro_3: Swift::String
+  @_Concurrency::MainActor public static let NATIVE_FULL_INTRO: AdmobLibrary::NativeHolderAdmob
+  @_Concurrency::MainActor public static let NATIVE_FULL_INTRO2: AdmobLibrary::NativeHolderAdmob
+  @objc @_Concurrency::MainActor deinit
+}
+@_hasMissingDesignatedInitializers @_Concurrency::MainActor final public class DebugModeManager {
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::DebugModeManager
+  @_Concurrency::MainActor final public func configureDebugFlag(rcValue: Swift::Bool, completion: (@_Concurrency::MainActor @Sendable (Swift::Bool) -> Swift::Void)? = nil)
+  @objc @_Concurrency::MainActor deinit
+}
+extension SwiftUICore::Color {
+  @_Concurrency::MainActor public init(hex: Swift::String)
+}
+@_Concurrency::MainActor @preconcurrency public struct BackButtonHandler : SwiftUI::UIViewControllerRepresentable {
+  @_Concurrency::MainActor @preconcurrency public let onBackPressed: () -> Swift::Void
+  @_Concurrency::MainActor @preconcurrency public func makeUIViewController(context: AdmobLibrary::BackButtonHandler.SwiftUI::Context) -> AdmobLibrary::BackButtonViewController
+  @_Concurrency::MainActor @preconcurrency public func updateUIViewController(_ uiViewController: AdmobLibrary::BackButtonViewController, context: AdmobLibrary::BackButtonHandler.SwiftUI::Context)
+  public typealias Body = Swift::Never
+  public typealias Coordinator = Swift::Void
+  public typealias UIViewControllerType = AdmobLibrary::BackButtonViewController
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor @preconcurrency public class BackButtonViewController : UIKit::UIViewController {
+  @_Concurrency::MainActor @preconcurrency public var onBackPressed: (() -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public func viewWillAppear(_ animated: Swift::Bool)
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public func viewDidAppear(_ animated: Swift::Bool)
+  @_Concurrency::MainActor @preconcurrency @objc override dynamic public init(nibName nibNameOrNil: Swift::String?, bundle nibBundleOrNil: Foundation::Bundle?)
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation::NSCoder)
+  @objc @_Concurrency::MainActor deinit
+}
+extension SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public func onBackPressed(perform action: @escaping () -> Swift::Void) -> some SwiftUICore::View
+  
+}
+extension SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public func ifAvailableGlassEffect() -> some SwiftUICore::View
+  
+  @_Concurrency::MainActor @preconcurrency public func buttonGlassEffect() -> some SwiftUICore::View
+  
+  @_Concurrency::MainActor @preconcurrency public func cameraGlassBackground() -> some SwiftUICore::View
+  
+  @_Concurrency::MainActor @preconcurrency public func fillterGlassBackground() -> some SwiftUICore::View
+  
+}
+@_Concurrency::MainActor public struct DeviceCapabilities {
+  @_Concurrency::MainActor public static func hasFlash() -> Swift::Bool
+  @_Concurrency::MainActor public static func hasFrontCamera() -> Swift::Bool
+}
+extension SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var isIPad: Swift::Bool {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor public class GoogleMobileAdsConsentManager : ObjectiveC::NSObject {
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::GoogleMobileAdsConsentManager
+  @_Concurrency::MainActor public var isMobileAdsStartCalled: Swift::Bool
+  @_Concurrency::MainActor public var canRequestAds: Swift::Bool {
+    get
+  }
+  @_Concurrency::MainActor public var isPrivacyOptionsRequired: Swift::Bool {
+    get
+  }
+  @_Concurrency::MainActor public var isPersonalizedAdsAllowed: Swift::Bool {
+    get
+  }
+  @_Concurrency::MainActor public func gatherConsent(consentGatheringComplete: @escaping @_Concurrency::MainActor @Sendable ((any Swift::Error)?) -> Swift::Void)
+  @_Concurrency::MainActor public func presentPrivacyOptionsForm() async throws
+  @_Concurrency::MainActor public func startGoogleMobileAdsSDK()
+  @_Concurrency::MainActor @objc override dynamic public init()
+  @objc @_Concurrency::MainActor deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor public class InterstitialAdManager : ObjectiveC::NSObject, GoogleMobileAds::FullScreenContentDelegate {
+  @_Concurrency::MainActor public var interstitialAd: GoogleMobileAds::InterstitialAd?
+  @_Concurrency::MainActor public var isLoading: Swift::Bool
+  @_Concurrency::MainActor public var onAdDismissed: (@_Concurrency::MainActor @Sendable () -> Swift::Void)?
+  @_Concurrency::MainActor public func loadInterstitialAd(adUnitID: Swift::String, onAdLoaded: (@_Concurrency::MainActor @Sendable () -> Swift::Void)? = nil, onAdFailedToLoad: (@_Concurrency::MainActor @Sendable (any Swift::Error) -> Swift::Void)? = nil, onAdDismissed: (@_Concurrency::MainActor @Sendable () -> Swift::Void)? = nil)
+  @_Concurrency::MainActor public func showInterstitialAd()
+  @_Concurrency::MainActor @preconcurrency @objc public func ad(_ ad: any GoogleMobileAds::FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Swift::Error)
+  @_Concurrency::MainActor @preconcurrency @objc public func adWillPresentFullScreenContent(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func adDidDismissFullScreenContent(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func adDidRecordImpression(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @objc override dynamic public init()
+  @objc @_Concurrency::MainActor deinit
+}
+@_Concurrency::MainActor public func loadAndShowInter(configKey: Swift::String, onAdDismiss: @escaping () -> Swift::Void)
+@_Concurrency::MainActor final public class InterAdRunner {
+  @_Concurrency::MainActor public init(key: Swift::String, onAdDismiss: @escaping () -> Swift::Void)
+  @_Concurrency::MainActor final public func loadAD()
+  @objc @_Concurrency::MainActor deinit
+}
+@_Concurrency::MainActor public enum InterAdHolder {
+  @_Concurrency::MainActor public static var runner: AdmobLibrary::InterAdRunner?
+  @_Concurrency::MainActor public static var interstitialManager: AdmobLibrary::InterstitialAdManager?
+  @_Concurrency::MainActor public static var nativeManager: AdmobLibrary::NativeAdFullScreenManager?
+  @_Concurrency::MainActor public static var cappingCounters: [Swift::String : Swift::Int]
+}
+@_Concurrency::MainActor @preconcurrency public struct LoadingAdView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary13LoadingAdViewV4bodyQrvp", 0) __
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency::MainActor @preconcurrency public class LoadingAdViewController : UIKit::UIViewController {
+  @_Concurrency::MainActor @preconcurrency public static let shared: AdmobLibrary::LoadingAdViewController
+  @_Concurrency::MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation::NSCoder)
+  @_Concurrency::MainActor @preconcurrency public func show()
+  @_Concurrency::MainActor @preconcurrency public func hide()
+  @objc @_Concurrency::MainActor deinit
+}
+
+@_hasMissingDesignatedInitializers @_Concurrency::MainActor public class LocalizationManager : Combine::ObservableObject {
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::LocalizationManager
+  @Combine::Published<Swift::String> @_projectedValueProperty($currentLanguage) @_Concurrency::MainActor public var currentLanguage: Swift::String {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+  }
+  @_Concurrency::MainActor public var $currentLanguage: Combine::Published<Swift::String>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @_Concurrency::MainActor public func localized(_ key: Swift::String) -> Swift::String
+  public typealias ObjectWillChangePublisher = Combine::ObservableObjectPublisher
+  @objc @_Concurrency::MainActor deinit
+}
+extension Swift::String {
+  @_Concurrency::MainActor public func localized() -> Swift::String
+  @_Concurrency::MainActor public func localized(_ args: any Swift::CVarArg...) -> Swift::String
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor public class NativeAdFullScreenManager : ObjectiveC::NSObject, Combine::ObservableObject, GoogleMobileAds::NativeAdLoaderDelegate {
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::NativeAdFullScreenManager
+  @Combine::Published<GoogleMobileAds::NativeAd?> @_projectedValueProperty($nativeAd) @_Concurrency::MainActor public var nativeAd: GoogleMobileAds::NativeAd? {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $nativeAd: Combine::Published<GoogleMobileAds::NativeAd?>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @Combine::Published<Swift::Bool> @_projectedValueProperty($isLoading) @_Concurrency::MainActor public var isLoading: Swift::Bool {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $isLoading: Combine::Published<Swift::Bool>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @Combine::Published<Swift::Bool> @_projectedValueProperty($isloadFail) @_Concurrency::MainActor public var isloadFail: Swift::Bool {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $isloadFail: Combine::Published<Swift::Bool>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @_Concurrency::MainActor public var onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)?
+  @_Concurrency::MainActor public var onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)?
+  @_Concurrency::MainActor @objc override dynamic public init()
+  @_Concurrency::MainActor public func loadNativeAd(nativeHolder: AdmobLibrary::NativeHolderAdmob, onLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)? = nil, onFailed: ((any Swift::Error) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor @preconcurrency @objc public func adLoader(_ adLoader: GoogleMobileAds::AdLoader, didReceive nativeAd: GoogleMobileAds::NativeAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func adLoader(_ adLoader: GoogleMobileAds::AdLoader, didFailToReceiveAdWithError error: any Swift::Error)
+  public typealias ObjectWillChangePublisher = Combine::ObservableObjectPublisher
+  @objc @_Concurrency::MainActor deinit
+}
+extension AdmobLibrary::NativeAdFullScreenManager : GoogleMobileAds::NativeAdDelegate {
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func nativeAdDidRecordImpression(_ nativeAd: GoogleMobileAds::NativeAd)
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func nativeAdDidRecordClick(_ nativeAd: GoogleMobileAds::NativeAd)
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeAdFullScreenViewWrapper : SwiftUI::UIViewRepresentable {
+  @_Concurrency::MainActor @preconcurrency public let nativeAd: GoogleMobileAds::NativeAd
+  @_Concurrency::MainActor @preconcurrency public func makeUIView(context: AdmobLibrary::NativeAdFullScreenViewWrapper.SwiftUI::Context) -> GoogleMobileAds::NativeAdView
+  @_Concurrency::MainActor @preconcurrency public func updateUIView(_ nativeAdView: GoogleMobileAds::NativeAdView, context: AdmobLibrary::NativeAdFullScreenViewWrapper.SwiftUI::Context)
+  public typealias Body = Swift::Never
+  public typealias Coordinator = Swift::Void
+  public typealias UIViewType = GoogleMobileAds::NativeAdView
+}
+@_Concurrency::MainActor @preconcurrency public struct CustomNativeAdFullScreenView : SwiftUI::UIViewRepresentable {
+  @_Concurrency::MainActor @preconcurrency public let nativeAd: GoogleMobileAds::NativeAd
+  @_Concurrency::MainActor @preconcurrency public func makeUIView(context: AdmobLibrary::CustomNativeAdFullScreenView.SwiftUI::Context) -> GoogleMobileAds::NativeAdView
+  @_Concurrency::MainActor @preconcurrency public func updateUIView(_ nativeAdView: GoogleMobileAds::NativeAdView, context: AdmobLibrary::CustomNativeAdFullScreenView.SwiftUI::Context)
+  public typealias Body = Swift::Never
+  public typealias Coordinator = Swift::Void
+  public typealias UIViewType = GoogleMobileAds::NativeAdView
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeAdFullScreenSwiftUIView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let nativeAd: GoogleMobileAds::NativeAd
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary29NativeAdFullScreenSwiftUIViewV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeAdFullScreenContainer : SwiftUICore::View {
+  @SwiftUICore::ObservedObject<AdmobLibrary::NativeHolderAdmob> @_projectedValueProperty($nativeHolder) @_Concurrency::MainActor @preconcurrency public var nativeHolder: AdmobLibrary::NativeHolderAdmob {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor @preconcurrency public var $nativeHolder: SwiftUICore::ObservedObject<AdmobLibrary::NativeHolderAdmob>.SwiftUICore::Wrapper {
+    get
+  }
+  @_Concurrency::MainActor @preconcurrency public let onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public let onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public init(nativeHolder: AdmobLibrary::NativeHolderAdmob, onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)? = nil, onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary27NativeAdFullScreenContainerV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeAdFullScreenLoadingView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary29NativeAdFullScreenLoadingViewV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct ShimmerFullScreenEffect : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary23ShimmerFullScreenEffectV4bodyQrvp", 0) __
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor public class NativeAdManager : ObjectiveC::NSObject, Combine::ObservableObject, GoogleMobileAds::NativeAdLoaderDelegate {
+  @Combine::Published<GoogleMobileAds::NativeAd?> @_projectedValueProperty($nativeAd) @_Concurrency::MainActor public var nativeAd: GoogleMobileAds::NativeAd? {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $nativeAd: Combine::Published<GoogleMobileAds::NativeAd?>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @Combine::Published<Swift::Bool> @_projectedValueProperty($isLoading) @_Concurrency::MainActor public var isLoading: Swift::Bool {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $isLoading: Combine::Published<Swift::Bool>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @Combine::Published<Swift::Bool> @_projectedValueProperty($isloadFail) @_Concurrency::MainActor public var isloadFail: Swift::Bool {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $isloadFail: Combine::Published<Swift::Bool>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @_Concurrency::MainActor public var onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)?
+  @_Concurrency::MainActor public var onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)?
+  @_Concurrency::MainActor @objc override dynamic public init()
+  @_Concurrency::MainActor public func loadNativeAd(adUnitID: Swift::String, onLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)? = nil, onFailed: ((any Swift::Error) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor @preconcurrency @objc public func adLoader(_ adLoader: GoogleMobileAds::AdLoader, didReceive nativeAd: GoogleMobileAds::NativeAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func adLoader(_ adLoader: GoogleMobileAds::AdLoader, didFailToReceiveAdWithError error: any Swift::Error)
+  public typealias ObjectWillChangePublisher = Combine::ObservableObjectPublisher
+  @objc @_Concurrency::MainActor deinit
+}
+@_Concurrency::MainActor @preconcurrency public struct CustomNativeAdView : SwiftUI::UIViewRepresentable {
+  @_Concurrency::MainActor @preconcurrency public let nativeAd: GoogleMobileAds::NativeAd
+  @_Concurrency::MainActor @preconcurrency public func makeUIView(context: AdmobLibrary::CustomNativeAdView.SwiftUI::Context) -> GoogleMobileAds::NativeAdView
+  @_Concurrency::MainActor @preconcurrency public func updateUIView(_ nativeAdView: GoogleMobileAds::NativeAdView, context: AdmobLibrary::CustomNativeAdView.SwiftUI::Context)
+  public typealias Body = Swift::Never
+  public typealias Coordinator = Swift::Void
+  public typealias UIViewType = GoogleMobileAds::NativeAdView
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeAdSwiftUIView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let nativeAd: GoogleMobileAds::NativeAd
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary19NativeAdSwiftUIViewV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeAdContainer : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let adUnitID: Swift::String
+  @_Concurrency::MainActor @preconcurrency public let onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public let onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public init(adUnitID: Swift::String, onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)? = nil, onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary17NativeAdContainerV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeAdLoadingView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary19NativeAdLoadingViewV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct ShimmerEffect : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary13ShimmerEffectV4bodyQrvp", 0) __
+}
+extension AdmobLibrary::NativeAdManager : GoogleMobileAds::NativeAdDelegate {
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func nativeAdDidRecordImpression(_ nativeAd: GoogleMobileAds::NativeAd)
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func nativeAdDidRecordClick(_ nativeAd: GoogleMobileAds::NativeAd)
+}
+@_Concurrency::MainActor @preconcurrency public struct CustomNativeCollapAdView : SwiftUI::UIViewRepresentable {
+  @_Concurrency::MainActor @preconcurrency public let nativeAd: GoogleMobileAds::NativeAd
+  @SwiftUICore::Binding @_projectedValueProperty($isCollapsed) @_Concurrency::MainActor @preconcurrency public var isCollapsed: Swift::Bool {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    nonmutating set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    nonmutating _modify
+  }
+  @_Concurrency::MainActor @preconcurrency public var $isCollapsed: SwiftUICore::Binding<Swift::Bool> {
+    get
+  }
+  @_Concurrency::MainActor @preconcurrency public let onClose: (() -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public func makeUIView(context: AdmobLibrary::CustomNativeCollapAdView.SwiftUI::Context) -> GoogleMobileAds::NativeAdView
+  @_Concurrency::MainActor @preconcurrency public func updateUIView(_ nativeAdView: GoogleMobileAds::NativeAdView, context: AdmobLibrary::CustomNativeCollapAdView.SwiftUI::Context)
+  @_Concurrency::MainActor @preconcurrency public func makeCoordinator() -> AdmobLibrary::CustomNativeCollapAdView.AdmobLibrary::Coordinator
+  @objc @_Concurrency::MainActor public class Coordinator : ObjectiveC::NSObject {
+    @SwiftUICore::Binding @_projectedValueProperty($isCollapsed) @_Concurrency::MainActor public var isCollapsed: Swift::Bool {
+      get
+      @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+      set
+      @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+      _modify
+    }
+    @_Concurrency::MainActor public var $isCollapsed: SwiftUICore::Binding<Swift::Bool> {
+      get
+    }
+    @_Concurrency::MainActor final public let onClose: (() -> Swift::Void)?
+    @_Concurrency::MainActor public init(isCollapsed: SwiftUICore::Binding<Swift::Bool>, onClose: (() -> Swift::Void)?)
+    @objc @_Concurrency::MainActor public func closeButtonTapped()
+    @objc @_Concurrency::MainActor deinit
+  }
+  public typealias Body = Swift::Never
+  public typealias UIViewType = GoogleMobileAds::NativeAdView
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeCollapAdSwiftUIView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let nativeAd: GoogleMobileAds::NativeAd
+  @_Concurrency::MainActor @preconcurrency public var isClose: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public var onClose: (() -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary25NativeCollapAdSwiftUIViewV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct CollapsedAdView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let nativeAd: GoogleMobileAds::NativeAd
+  @SwiftUICore::Binding @_projectedValueProperty($isCollapsed) @_Concurrency::MainActor @preconcurrency public var isCollapsed: Swift::Bool {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    nonmutating set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    nonmutating _modify
+  }
+  @_Concurrency::MainActor @preconcurrency public var $isCollapsed: SwiftUICore::Binding<Swift::Bool> {
+    get
+  }
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary15CollapsedAdViewV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeCollapAdContainer : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let adUnitID: Swift::String
+  @_Concurrency::MainActor @preconcurrency public let onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public let onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public init(adUnitID: Swift::String, onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)? = nil, onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary23NativeCollapAdContainerV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeCollapCloseAdContainer : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let adUnitID: Swift::String
+  @_Concurrency::MainActor @preconcurrency public let onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public let onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public let onAdClose: (() -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public init(adUnitID: Swift::String, onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)? = nil, onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)? = nil, onAdClose: (() -> Swift::Void)? = nil)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary28NativeCollapCloseAdContainerV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeCollapAdLoadingView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary25NativeCollapAdLoadingViewV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct ShimmerCollapEffect : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary19ShimmerCollapEffectV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor public class NativeHolderAdmob : Foundation::ObservableObject {
+  @Combine::Published<GoogleMobileAds::NativeAd?> @_projectedValueProperty($nativeAd) @_Concurrency::MainActor public var nativeAd: GoogleMobileAds::NativeAd? {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $nativeAd: Combine::Published<GoogleMobileAds::NativeAd?>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @Combine::Published<Swift::Bool> @_projectedValueProperty($isLoading) @_Concurrency::MainActor public var isLoading: Swift::Bool {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $isLoading: Combine::Published<Swift::Bool>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @_Concurrency::MainActor final public let adsID: Swift::String
+  @_Concurrency::MainActor public init(adUnitID: Swift::String)
+  public typealias ObjectWillChangePublisher = Combine::ObservableObjectPublisher
+  @objc @_Concurrency::MainActor deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor public class NativeSmallBannerAdManager : ObjectiveC::NSObject, Combine::ObservableObject, GoogleMobileAds::NativeAdLoaderDelegate {
+  @Combine::Published<GoogleMobileAds::NativeAd?> @_projectedValueProperty($nativeAd) @_Concurrency::MainActor public var nativeAd: GoogleMobileAds::NativeAd? {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $nativeAd: Combine::Published<GoogleMobileAds::NativeAd?>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @Combine::Published<Swift::Bool> @_projectedValueProperty($isLoading) @_Concurrency::MainActor public var isLoading: Swift::Bool {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $isLoading: Combine::Published<Swift::Bool>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @Combine::Published<Swift::Bool> @_projectedValueProperty($isloadFail) @_Concurrency::MainActor public var isloadFail: Swift::Bool {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $isloadFail: Combine::Published<Swift::Bool>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @_Concurrency::MainActor public var onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)?
+  @_Concurrency::MainActor public var onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)?
+  @_Concurrency::MainActor @objc override dynamic public init()
+  @_Concurrency::MainActor public func loadNativeAd(adUnitID: Swift::String, onLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)? = nil, onFailed: ((any Swift::Error) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor @preconcurrency @objc public func adLoader(_ adLoader: GoogleMobileAds::AdLoader, didReceive nativeAd: GoogleMobileAds::NativeAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func adLoader(_ adLoader: GoogleMobileAds::AdLoader, didFailToReceiveAdWithError error: any Swift::Error)
+  public typealias ObjectWillChangePublisher = Combine::ObservableObjectPublisher
+  @objc @_Concurrency::MainActor deinit
+}
+@_Concurrency::MainActor @preconcurrency public struct CustomNativeSmallBannerAdView : SwiftUI::UIViewRepresentable {
+  @_Concurrency::MainActor @preconcurrency public let nativeAd: GoogleMobileAds::NativeAd
+  @_Concurrency::MainActor @preconcurrency public func makeUIView(context: AdmobLibrary::CustomNativeSmallBannerAdView.SwiftUI::Context) -> GoogleMobileAds::NativeAdView
+  @_Concurrency::MainActor @preconcurrency public func updateUIView(_ nativeAdView: GoogleMobileAds::NativeAdView, context: AdmobLibrary::CustomNativeSmallBannerAdView.SwiftUI::Context)
+  public typealias Body = Swift::Never
+  public typealias Coordinator = Swift::Void
+  public typealias UIViewType = GoogleMobileAds::NativeAdView
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeSmallBannerAdSwiftUIView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let nativeAd: GoogleMobileAds::NativeAd
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary30NativeSmallBannerAdSwiftUIViewV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeSmallBannerAdContainer : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let adUnitID: Swift::String
+  @_Concurrency::MainActor @preconcurrency public let onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public let onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public init(adUnitID: Swift::String, onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)? = nil, onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary28NativeSmallBannerAdContainerV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeSmallBannerAdLoadingView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary30NativeSmallBannerAdLoadingViewV4bodyQrvp", 0) __
+}
+extension AdmobLibrary::NativeSmallBannerAdManager : GoogleMobileAds::NativeAdDelegate {
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func nativeAdDidRecordImpression(_ nativeAd: GoogleMobileAds::NativeAd)
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func nativeAdDidRecordClick(_ nativeAd: GoogleMobileAds::NativeAd)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor public class NativeSmallPlayAdManager : ObjectiveC::NSObject, Combine::ObservableObject, GoogleMobileAds::NativeAdLoaderDelegate {
+  @Combine::Published<GoogleMobileAds::NativeAd?> @_projectedValueProperty($nativeAd) @_Concurrency::MainActor public var nativeAd: GoogleMobileAds::NativeAd? {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $nativeAd: Combine::Published<GoogleMobileAds::NativeAd?>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @Combine::Published<Swift::Bool> @_projectedValueProperty($isLoading) @_Concurrency::MainActor public var isLoading: Swift::Bool {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $isLoading: Combine::Published<Swift::Bool>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @Combine::Published<Swift::Bool> @_projectedValueProperty($isloadFail) @_Concurrency::MainActor public var isloadFail: Swift::Bool {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor public var $isloadFail: Combine::Published<Swift::Bool>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @_Concurrency::MainActor public var onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)?
+  @_Concurrency::MainActor public var onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)?
+  @_Concurrency::MainActor @objc override dynamic public init()
+  @_Concurrency::MainActor public func loadNativeAd(adUnitID: Swift::String, onLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)? = nil, onFailed: ((any Swift::Error) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor @preconcurrency @objc public func adLoader(_ adLoader: GoogleMobileAds::AdLoader, didReceive nativeAd: GoogleMobileAds::NativeAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func adLoader(_ adLoader: GoogleMobileAds::AdLoader, didFailToReceiveAdWithError error: any Swift::Error)
+  public typealias ObjectWillChangePublisher = Combine::ObservableObjectPublisher
+  @objc @_Concurrency::MainActor deinit
+}
+@_Concurrency::MainActor @preconcurrency public struct CustomNativeSmallAdView : SwiftUI::UIViewRepresentable {
+  @_Concurrency::MainActor @preconcurrency public let nativeAd: GoogleMobileAds::NativeAd
+  @_Concurrency::MainActor @preconcurrency public func makeUIView(context: AdmobLibrary::CustomNativeSmallAdView.SwiftUI::Context) -> GoogleMobileAds::NativeAdView
+  @_Concurrency::MainActor @preconcurrency public func updateUIView(_ nativeAdView: GoogleMobileAds::NativeAdView, context: AdmobLibrary::CustomNativeSmallAdView.SwiftUI::Context)
+  public typealias Body = Swift::Never
+  public typealias Coordinator = Swift::Void
+  public typealias UIViewType = GoogleMobileAds::NativeAdView
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeSmallAdSwiftUIView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let nativeAd: GoogleMobileAds::NativeAd
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary24NativeSmallAdSwiftUIViewV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeSmallPlayAdContainer : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let adUnitID: Swift::String
+  @_Concurrency::MainActor @preconcurrency public let onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public let onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)?
+  @_Concurrency::MainActor @preconcurrency public init(adUnitID: Swift::String, onAdLoaded: ((GoogleMobileAds::NativeAd) -> Swift::Void)? = nil, onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary26NativeSmallPlayAdContainerV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct NativeSmallAdLoadingView : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdmobLibrary24NativeSmallAdLoadingViewV4bodyQrvp", 0) __
+}
+extension AdmobLibrary::NativeSmallPlayAdManager : GoogleMobileAds::NativeAdDelegate {
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func nativeAdDidRecordImpression(_ nativeAd: GoogleMobileAds::NativeAd)
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func nativeAdDidRecordClick(_ nativeAd: GoogleMobileAds::NativeAd)
+}
+@_Concurrency::MainActor public func nativeView(configKey: Swift::String, onAdLoaded: (() -> Swift::Void)? = nil, onAdFailedToLoad: ((any Swift::Error) -> Swift::Void)? = nil) -> some SwiftUICore::View
+
+@_Concurrency::MainActor final public class NetworkMonitor : Foundation::ObservableObject {
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::NetworkMonitor
+  @Combine::Published<Swift::Bool> @_projectedValueProperty($isConnected) @_Concurrency::MainActor final public var isConnected: Swift::Bool {
+    get
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    set
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    _modify
+  }
+  @_Concurrency::MainActor final public var $isConnected: Combine::Published<Swift::Bool>.Combine::Publisher {
+    get
+    @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+    set
+  }
+  @_Concurrency::MainActor public init()
+  @objc deinit
+  nonisolated public static func checkConnection() -> Swift::Bool
+  public typealias ObjectWillChangePublisher = Combine::ObservableObjectPublisher
+}
+@_Concurrency::MainActor public protocol OnResumeManagerDelegate : AnyObject {
+  @_Concurrency::MainActor func appOpenAdManagerAdDidComplete(_ appOpenAdManager: AdmobLibrary::OnResumeManager)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor public class OnResumeManager : ObjectiveC::NSObject {
+  @_Concurrency::MainActor final public let timeoutInterval: Swift::Double
+  @_Concurrency::MainActor public var appOpenAd: GoogleMobileAds::AppOpenAd?
+  @_Concurrency::MainActor weak public var appOpenAdManagerDelegate: (any AdmobLibrary::OnResumeManagerDelegate)?
+  @_Concurrency::MainActor public var isLoadingAd: Swift::Bool
+  @_Concurrency::MainActor public var isShowingAd: Swift::Bool
+  @_Concurrency::MainActor public var loadTime: Foundation::Date?
+  @_Concurrency::MainActor public var overlayView: UIKit::UIView?
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::OnResumeManager
+  @_Concurrency::MainActor public var idAOA: Swift::String
+  @_Concurrency::MainActor public func loadAd(adUnitID: Swift::String)
+  @_Concurrency::MainActor public func showAdIfAvailable()
+  @_Concurrency::MainActor @objc override dynamic public init()
+  @objc @_Concurrency::MainActor deinit
+}
+extension AdmobLibrary::OnResumeManager : GoogleMobileAds::FullScreenContentDelegate {
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func adWillPresentFullScreenContent(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func adDidDismissFullScreenContent(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func adWillDismissFullScreenContent(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc dynamic public func ad(_ ad: any GoogleMobileAds::FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Swift::Error)
+}
+@_hasMissingDesignatedInitializers @_Concurrency::MainActor public class PaidEventHandlerManager {
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::PaidEventHandlerManager
+  @_Concurrency::MainActor public func getPaidEventHandler(dataPaidEvent: GoogleMobileAds::AdValue, typeAds: AdmobLibrary::TypeAds, aoa: GoogleMobileAds::AppOpenAd? = nil, native: GoogleMobileAds::NativeAd? = nil, inter: GoogleMobileAds::InterstitialAd? = nil, banner: GoogleMobileAds::BannerView? = nil, reward: GoogleMobileAds::RewardedAd? = nil, rewardedInterstitial: GoogleMobileAds::RewardedInterstitialAd? = nil, adUnit: Swift::String)
+  @objc @_Concurrency::MainActor deinit
+}
+@_hasMissingDesignatedInitializers @_Concurrency::MainActor public class RemoteConfigManager {
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::RemoteConfigManager
+  @_Concurrency::MainActor public func initRemoteConfig(defaults: [Swift::String : ObjectiveC::NSObject], onComplete: @escaping @_Concurrency::MainActor @Sendable () -> Swift::Void)
+  @_Concurrency::MainActor public func getValue(forKey key: Swift::String) -> Swift::String
+  @_Concurrency::MainActor public func getValue<T>(forKey key: Swift::String, as type: T.Type) -> T? where T : Swift::Decodable
+  @objc @_Concurrency::MainActor deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor public class RewardAdManager : ObjectiveC::NSObject, GoogleMobileAds::FullScreenContentDelegate {
+  @_Concurrency::MainActor public var rewardedAd: GoogleMobileAds::RewardedAd?
+  @_Concurrency::MainActor public var isLoading: Swift::Bool
+  @_Concurrency::MainActor public var onAdDismissed: (@_Concurrency::MainActor @Sendable (Swift::Bool) -> Swift::Void)?
+  @_Concurrency::MainActor public var isGranted: Swift::Bool
+  @_Concurrency::MainActor public func loadRewardedAdAd(adUnitID: Swift::String, onAdLoaded: (@_Concurrency::MainActor @Sendable () -> Swift::Void)? = nil, onAdFailedToLoad: (@_Concurrency::MainActor @Sendable (any Swift::Error) -> Swift::Void)? = nil, onAdDismissed: (@_Concurrency::MainActor @Sendable (Swift::Bool) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor public func showRewardedAdAd()
+  @_Concurrency::MainActor @preconcurrency @objc public func ad(_ ad: any GoogleMobileAds::FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Swift::Error)
+  @_Concurrency::MainActor @preconcurrency @objc public func adWillPresentFullScreenContent(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func adDidDismissFullScreenContent(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func adDidRecordImpression(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @objc override dynamic public init()
+  @objc @_Concurrency::MainActor deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor public class RewardedInterstitialAdManager : ObjectiveC::NSObject, GoogleMobileAds::FullScreenContentDelegate {
+  @_Concurrency::MainActor public var rewardedAd: GoogleMobileAds::RewardedInterstitialAd?
+  @_Concurrency::MainActor public var isLoading: Swift::Bool
+  @_Concurrency::MainActor public var onAdDismissed: (@_Concurrency::MainActor @Sendable (Swift::Bool) -> Swift::Void)?
+  @_Concurrency::MainActor public var isGranted: Swift::Bool
+  @_Concurrency::MainActor public func loadRewardedAdAd(adUnitID: Swift::String, onAdLoaded: (@_Concurrency::MainActor @Sendable () -> Swift::Void)? = nil, onAdFailedToLoad: (@_Concurrency::MainActor @Sendable (any Swift::Error) -> Swift::Void)? = nil, onAdDismissed: (@_Concurrency::MainActor @Sendable (Swift::Bool) -> Swift::Void)? = nil)
+  @_Concurrency::MainActor public func showRewardedAdAd()
+  @_Concurrency::MainActor @preconcurrency @objc public func ad(_ ad: any GoogleMobileAds::FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Swift::Error)
+  @_Concurrency::MainActor @preconcurrency @objc public func adWillPresentFullScreenContent(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func adDidDismissFullScreenContent(_ ad: any GoogleMobileAds::FullScreenPresentingAd)
+  @_Concurrency::MainActor @objc override dynamic public init()
+  @objc @_Concurrency::MainActor deinit
+}
+@_hasMissingDesignatedInitializers @_Concurrency::MainActor final public class SolarEngineManager {
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::SolarEngineManager
+  @_Concurrency::MainActor final public func setupSolarEngine(key: Swift::String)
+  @objc @_Concurrency::MainActor deinit
+}
+@_hasMissingDesignatedInitializers @_Concurrency::MainActor final public class TenjinManager {
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::TenjinManager
+  @_Concurrency::MainActor final public func initialize(sdkKey: Swift::String)
+  @_Concurrency::MainActor public static func trackImpression(value: GoogleMobileAds::AdValue, adUnitID: Swift::String, responseInfo: GoogleMobileAds::ResponseInfo? = nil)
+  @objc @_Concurrency::MainActor deinit
+}
+@_Concurrency::MainActor public enum TypeAds : Swift::String {
+  case nativeAds
+  case bannerAds
+  case aoa
+  case interAds
+  case rewardAds
+  @_Concurrency::MainActor public var typeNumber: SolarEngineSDK::SolarEngineAdType {
+    get
+  }
+  nonisolated public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  nonisolated public var rawValue: Swift::String {
+    get
+  }
+}
+extension AdmobLibrary::AdmobLibraryAssets : Swift::Sendable {}
+extension AdmobLibrary::AdsManager : Swift::Sendable {}
+extension AdmobLibrary::NativeFullScreenAdPresenter : Swift::Sendable {}
+extension AdmobLibrary::AppOpenAdManager : Swift::Sendable {}
+extension AdmobLibrary::ShimmerView : Swift::Sendable {}
+extension AdmobLibrary::BannerAdViewWithShimmer : Swift::Sendable {}
+extension AdmobLibrary::BannerCollapsibleAdView : Swift::Sendable {}
+extension AdmobLibrary::BannerAdViewHeightModifier : Swift::Sendable {}
+extension AdmobLibrary::Common : Swift::Sendable {}
+extension AdmobLibrary::DebugModeManager : Swift::Sendable {}
+extension AdmobLibrary::BackButtonHandler : Swift::Sendable {}
+extension AdmobLibrary::DeviceCapabilities : Swift::Sendable {}
+extension AdmobLibrary::GoogleMobileAdsConsentManager : Swift::Sendable {}
+extension AdmobLibrary::InterstitialAdManager : Swift::Sendable {}
+extension AdmobLibrary::InterAdRunner : Swift::Sendable {}
+extension AdmobLibrary::InterAdHolder : Swift::Sendable {}
+extension AdmobLibrary::LoadingAdView : Swift::Sendable {}
+extension AdmobLibrary::LocalizationManager : Swift::Sendable {}
+extension AdmobLibrary::NativeAdFullScreenManager : Swift::Sendable {}
+extension AdmobLibrary::NativeAdFullScreenViewWrapper : Swift::Sendable {}
+extension AdmobLibrary::CustomNativeAdFullScreenView : Swift::Sendable {}
+extension AdmobLibrary::NativeAdFullScreenSwiftUIView : Swift::Sendable {}
+extension AdmobLibrary::NativeAdFullScreenContainer : Swift::Sendable {}
+extension AdmobLibrary::NativeAdFullScreenLoadingView : Swift::Sendable {}
+extension AdmobLibrary::ShimmerFullScreenEffect : Swift::Sendable {}
+extension AdmobLibrary::NativeAdManager : Swift::Sendable {}
+extension AdmobLibrary::CustomNativeAdView : Swift::Sendable {}
+extension AdmobLibrary::NativeAdSwiftUIView : Swift::Sendable {}
+extension AdmobLibrary::NativeAdContainer : Swift::Sendable {}
+extension AdmobLibrary::NativeAdLoadingView : Swift::Sendable {}
+extension AdmobLibrary::ShimmerEffect : Swift::Sendable {}
+extension AdmobLibrary::CustomNativeCollapAdView : Swift::Sendable {}
+extension AdmobLibrary::CustomNativeCollapAdView.AdmobLibrary::Coordinator : Swift::Sendable {}
+extension AdmobLibrary::NativeCollapAdSwiftUIView : Swift::Sendable {}
+extension AdmobLibrary::CollapsedAdView : Swift::Sendable {}
+extension AdmobLibrary::NativeCollapAdContainer : Swift::Sendable {}
+extension AdmobLibrary::NativeCollapCloseAdContainer : Swift::Sendable {}
+extension AdmobLibrary::NativeCollapAdLoadingView : Swift::Sendable {}
+extension AdmobLibrary::ShimmerCollapEffect : Swift::Sendable {}
+extension AdmobLibrary::NativeHolderAdmob : Swift::Sendable {}
+extension AdmobLibrary::NativeSmallBannerAdManager : Swift::Sendable {}
+extension AdmobLibrary::CustomNativeSmallBannerAdView : Swift::Sendable {}
+extension AdmobLibrary::NativeSmallBannerAdSwiftUIView : Swift::Sendable {}
+extension AdmobLibrary::NativeSmallBannerAdContainer : Swift::Sendable {}
+extension AdmobLibrary::NativeSmallBannerAdLoadingView : Swift::Sendable {}
+extension AdmobLibrary::NativeSmallPlayAdManager : Swift::Sendable {}
+extension AdmobLibrary::CustomNativeSmallAdView : Swift::Sendable {}
+extension AdmobLibrary::NativeSmallAdSwiftUIView : Swift::Sendable {}
+extension AdmobLibrary::NativeSmallPlayAdContainer : Swift::Sendable {}
+extension AdmobLibrary::NativeSmallAdLoadingView : Swift::Sendable {}
+extension AdmobLibrary::NetworkMonitor : Swift::Sendable {}
+extension AdmobLibrary::OnResumeManager : Swift::Sendable {}
+extension AdmobLibrary::PaidEventHandlerManager : Swift::Sendable {}
+extension AdmobLibrary::RemoteConfigManager : Swift::Sendable {}
+extension AdmobLibrary::RewardAdManager : Swift::Sendable {}
+extension AdmobLibrary::RewardedInterstitialAdManager : Swift::Sendable {}
+extension AdmobLibrary::SolarEngineManager : Swift::Sendable {}
+extension AdmobLibrary::TenjinManager : Swift::Sendable {}
+extension AdmobLibrary::TypeAds : Swift::Equatable {}
+extension AdmobLibrary::TypeAds : Swift::Hashable {}
+extension AdmobLibrary::TypeAds : Swift::RawRepresentable {}
+extension AdmobLibrary::TypeAds : Swift::Sendable {}

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'AdmobLibrary'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'Reusable AdMob views and managers for SwiftUI apps.'
   s.description      = 'Banner, native, interstitial, rewarded, and app-open ads, with Firebase Remote Config and mediation adapters.'
   s.homepage         = 'https://github.com/TienNguyen267/AdsLibrarys'
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.swift_versions = ['6.0']
   s.static_framework = true
 
-  s.source_files = 'Sources/AdmobLibrary/**/*.swift'
+  s.vendored_frameworks = 'AdmobLibrary.xcframework'
   s.resource_bundles = {
     'AdmobLibraryResources' => [
       'Sources/AdmobLibrary/Resources/**/*.{xib,xcassets,json}'
@@ -31,12 +31,4 @@ Pod::Spec.new do |s|
   s.dependency 'GoogleMobileAdsMediationUnity'
   s.dependency 'FirebaseRemoteConfig'
   s.dependency 'lottie-ios'
-
-  s.pod_target_xcconfig = {
-    'SWIFT_VERSION' => '6.0',
-    'SWIFT_DEFAULT_ACTOR_ISOLATION' => 'MainActor',
-    'SWIFT_APPROACHABLE_CONCURRENCY' => 'YES',
-    'SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY' => 'YES',
-    'IPHONEOS_DEPLOYMENT_TARGET' => '15.0'
-  }
 end

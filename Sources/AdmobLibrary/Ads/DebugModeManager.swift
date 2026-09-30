@@ -40,7 +40,7 @@
 
 
 import Foundation
-@preconcurrency import FirebaseRemoteConfig
+@preconcurrency internal import FirebaseRemoteConfig
 
 final public class DebugModeManager {
     

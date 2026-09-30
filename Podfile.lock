@@ -1,5 +1,5 @@
 PODS:
-  - AdmobLibrary (1.0.1):
+  - AdmobLibrary (1.0.2):
     - FirebaseRemoteConfig
     - Google-Mobile-Ads-SDK (~> 13.0)
     - GoogleMobileAdsMediationAppLovin
@@ -12,13 +12,13 @@ PODS:
     - lottie-ios
     - SolarEngineSDKiOSInter (~> 1.3.1.0)
     - TenjinSDK
-  - Ads-Global (8.3.0.6):
-    - Ads-Global/BUAdSDK (= 8.3.0.6)
-  - Ads-Global/BUAdSDK (8.3.0.6):
+  - Ads-Global (8.3.0.7):
+    - Ads-Global/BUAdSDK (= 8.3.0.7)
+  - Ads-Global/BUAdSDK (8.3.0.7):
     - Ads-Global/PangleSDK
     - Ads-Global/TikTokBusinessSDK
-  - Ads-Global/PangleSDK (8.3.0.6)
-  - Ads-Global/TikTokBusinessSDK (8.3.0.6)
+  - Ads-Global/PangleSDK (8.3.0.7)
+  - Ads-Global/TikTokBusinessSDK (8.3.0.7)
   - AppLovinSDK (13.6.4)
   - FBAudienceNetwork (6.22.0)
   - FirebaseABTesting (12.14.0):
@@ -135,8 +135,8 @@ PODS:
   - GoogleMobileAdsMediationMintegral (8.1.7.0):
     - Google-Mobile-Ads-SDK (~> 13.3)
     - MintegralAdSDK/All (= 8.1.7)
-  - GoogleMobileAdsMediationPangle (8.3.0.6.0):
-    - Ads-Global (= 8.3.0.6)
+  - GoogleMobileAdsMediationPangle (8.3.0.7.0):
+    - Ads-Global (= 8.3.0.7)
     - Google-Mobile-Ads-SDK (~> 13.6)
   - GoogleMobileAdsMediationUnity (4.20.1.0):
     - Google-Mobile-Ads-SDK (~> 13.3)
@@ -185,7 +185,7 @@ PODS:
   - GoogleUtilities/UserDefaults (8.1.3):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - IronSourceAdQualitySDK (9.9.0)
+  - IronSourceAdQualitySDK (9.10.0)
   - IronSourceSDK (9.6.0.0):
     - IronSourceSDK/AdQuality (= 9.6.0.0)
     - IronSourceSDK/Ads (= 9.6.0.0)
@@ -234,7 +234,7 @@ PODS:
   - VungleAds (7.7.7)
 
 DEPENDENCIES:
-  - AdmobLibrary
+  - AdmobLibrary (from `.`)
   - FirebaseABTesting
   - FirebaseAnalytics
   - FirebaseCore
@@ -247,7 +247,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - AdmobLibrary
     - Ads-Global
     - AppLovinSDK
     - FBAudienceNetwork
@@ -289,9 +288,13 @@ SPEC REPOS:
     - UnityCoherenceLib
     - VungleAds
 
+EXTERNAL SOURCES:
+  AdmobLibrary:
+    :path: "."
+
 SPEC CHECKSUMS:
-  AdmobLibrary: 7ed216e5c156218b3e233195b945fc2935bc9177
-  Ads-Global: 7de80a4e99c131e16ecf7b4e3c154e435362e312
+  AdmobLibrary: 31da1d285b0ae9c2a0e4340f61d996b04593d02e
+  Ads-Global: 424ea0327b37385cce3bcbfe664f7e0294ba1bda
   AppLovinSDK: 730be87bac90c5b0f7d507c3a2530213f7685370
   FBAudienceNetwork: b05c65487114aa3bf3a68e865c60937a9fb03b69
   FirebaseABTesting: 1645e4c026dc11b2c82e717fd02d187535e65944
@@ -314,12 +317,12 @@ SPEC CHECKSUMS:
   GoogleMobileAdsMediationFacebook: 213c2a7cabd34f2e4115c3e7fa4780256043db42
   GoogleMobileAdsMediationIronSource: 02cf16f23072c32c6c07e662a6b6533658da9760
   GoogleMobileAdsMediationMintegral: 9dcaf262a0c0eff66c9bd3e80ead99d5e680685e
-  GoogleMobileAdsMediationPangle: f401fd14eb4e781e1d63d22530b5258a7852a521
+  GoogleMobileAdsMediationPangle: 24cd34bbcf9dfbd7907536d26ca47aca446a126d
   GoogleMobileAdsMediationUnity: cf8c4104b642d1829ce5ad7fd70184b9599bfc50
   GoogleMobileAdsMediationVungle: 06d54366214d5cab1d16acd3783cc28640837ee7
   GoogleUserMessagingPlatform: befe603da6501006420c206222acd449bba45a9c
   GoogleUtilities: 4e0c2ad9fa0d0d18b5c4df8bf57b461cba35b0bb
-  IronSourceAdQualitySDK: 8797f78661d72fc2bef00e8c1055047132dc7249
+  IronSourceAdQualitySDK: 779fc3754f27b3d5fae8da52c5709a2dbdb502a6
   IronSourceSDK: fd05921e1ed23cc69e6eb21477e6b86230c98e2e
   lottie-ios: 6467ca7035120c5b0e0acee58bb679cf15875686
   MintegralAdSDK: 611e5c22c00dcb8305481ea3319e7d42ff3a37b7
@@ -332,6 +335,6 @@ SPEC CHECKSUMS:
   UnityCoherenceLib: d9be08c5b9c2880cb220c7ecd643f97ebda422b7
   VungleAds: eb9e96673ce5699a38458e61ee70a997228af88a
 
-PODFILE CHECKSUM: 10cf5595e176c6692e6adc246b418c72fac61ddf
+PODFILE CHECKSUM: 3905b1c70516e1fff17792100895fcfce4a58507
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.17.0
