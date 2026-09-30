@@ -101,4 +101,18 @@ xcodebuild -create-xcframework \
   -framework "$STAGE/sim/AdmobLibrary.framework" \
   -output "$ROOT/AdmobLibrary.xcframework"
 
+# create-xcframework drops .swiftmodule files. Copy them back so clients can import the module.
+copy_swiftmodules() {
+  local src="$1/Modules/AdmobLibrary.swiftmodule"
+  local dest="$2/Modules/AdmobLibrary.swiftmodule"
+  mkdir -p "$dest"
+  cp "$src"/*.swiftmodule "$dest/"
+}
+copy_swiftmodules \
+  "$STAGE/ios/AdmobLibrary.framework" \
+  "$ROOT/AdmobLibrary.xcframework/ios-arm64/AdmobLibrary.framework"
+copy_swiftmodules \
+  "$STAGE/sim/AdmobLibrary.framework" \
+  "$ROOT/AdmobLibrary.xcframework/ios-arm64_x86_64-simulator/AdmobLibrary.framework"
+
 echo "Created $ROOT/AdmobLibrary.xcframework"
