@@ -1,5 +1,5 @@
 PODS:
-  - AdmobLibrary (1.0.0):
+  - AdmobLibrary (1.0.1):
     - FirebaseRemoteConfig
     - Google-Mobile-Ads-SDK (~> 13.0)
     - GoogleMobileAdsMediationAppLovin
@@ -145,6 +145,17 @@ PODS:
     - Google-Mobile-Ads-SDK (~> 13.3)
     - VungleAds (= 7.7.7)
   - GoogleUserMessagingPlatform (3.1.0)
+  - GoogleUtilities (8.1.3):
+    - GoogleUtilities/AppDelegateSwizzler (= 8.1.3)
+    - GoogleUtilities/Environment (= 8.1.3)
+    - GoogleUtilities/Logger (= 8.1.3)
+    - GoogleUtilities/MethodSwizzler (= 8.1.3)
+    - GoogleUtilities/Network (= 8.1.3)
+    - "GoogleUtilities/NSData+zlib (= 8.1.3)"
+    - GoogleUtilities/Privacy (= 8.1.3)
+    - GoogleUtilities/Reachability (= 8.1.3)
+    - GoogleUtilities/SwizzlerTestHelpers (= 8.1.3)
+    - GoogleUtilities/UserDefaults (= 8.1.3)
   - GoogleUtilities/AppDelegateSwizzler (8.1.3):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -169,6 +180,8 @@ PODS:
   - GoogleUtilities/Reachability (8.1.3):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
+  - GoogleUtilities/SwizzlerTestHelpers (8.1.3):
+    - GoogleUtilities/MethodSwizzler
   - GoogleUtilities/UserDefaults (8.1.3):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
@@ -221,14 +234,20 @@ PODS:
   - VungleAds (7.7.7)
 
 DEPENDENCIES:
-  - AdmobLibrary (from `.`)
+  - AdmobLibrary
+  - FirebaseABTesting
   - FirebaseAnalytics
   - FirebaseCore
   - FirebaseCrashlytics
   - FirebaseMessaging
+  - FirebaseRemoteConfig
+  - GoogleDataTransport
+  - GoogleUtilities
+  - nanopb
 
 SPEC REPOS:
   trunk:
+    - AdmobLibrary
     - Ads-Global
     - AppLovinSDK
     - FBAudienceNetwork
@@ -270,12 +289,8 @@ SPEC REPOS:
     - UnityCoherenceLib
     - VungleAds
 
-EXTERNAL SOURCES:
-  AdmobLibrary:
-    :path: "."
-
 SPEC CHECKSUMS:
-  AdmobLibrary: 8ac9668ba900fae424f467b58c0f2b6a52f3f494
+  AdmobLibrary: 7ed216e5c156218b3e233195b945fc2935bc9177
   Ads-Global: 7de80a4e99c131e16ecf7b4e3c154e435362e312
   AppLovinSDK: 730be87bac90c5b0f7d507c3a2530213f7685370
   FBAudienceNetwork: b05c65487114aa3bf3a68e865c60937a9fb03b69
@@ -317,6 +332,6 @@ SPEC CHECKSUMS:
   UnityCoherenceLib: d9be08c5b9c2880cb220c7ecd643f97ebda422b7
   VungleAds: eb9e96673ce5699a38458e61ee70a997228af88a
 
-PODFILE CHECKSUM: 5dcec12246759fafeec40ed8334d1e893b3265bb
+PODFILE CHECKSUM: 10cf5595e176c6692e6adc246b418c72fac61ddf
 
-COCOAPODS: 1.17.0
+COCOAPODS: 1.16.2

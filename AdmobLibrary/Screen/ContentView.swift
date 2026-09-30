@@ -11,101 +11,72 @@ import AppTrackingTransparency
 import UserNotifications
 
 struct ContentView: View {
-    
-    private let consentManager = GoogleMobileAdsConsentManager.shared
-    @State var isNextScreen = false
-    
-    
+
     @State private var showNetworkAlert = false
-    @State private var showAdFailedAlert = false
-    private let rewardedInterstitialManager = RewardAdManager()
-    
     @State private var hasRequestedATT = false
     @State private var hasRequestedNotification = false
     @State private var isViewAppeared = false
-    
+
+    private let sections: [(title: String, items: [AdExample])] = [
+        ("Banner", [.banner, .bannerCollapsible]),
+        ("Native", [
+            .nativeMedium,
+            .nativeSmallPlay,
+            .nativeSmallBanner,
+            .nativeCollapsible,
+            .nativeCollapsibleClose,
+            .nativeFullscreen
+        ]),
+        ("Fullscreen", [.interstitial, .rewarded, .rewardedInterstitial, .appOpen])
+    ]
+
     var body: some View {
         NavigationStack {
-            ZStack {
-                
-                
-                VStack {
-                    Text("Hello, world!")
-                        .onTapGesture {
-                            isNextScreen = true
-                        }
-                    
-                    Text("Show Reward")
-                        .onTapGesture {
-                            if NetworkMonitor.checkConnection() {
-                                rewardedInterstitialManager.loadRewardedAdAd(
-                                    adUnitID: "",
-                                    onAdLoaded: {
-                                        print("Quảng cáo đã load xong!")
-                                    },
-                                    onAdFailedToLoad: { error in
-                                        print("Load quảng cáo thất bại: \(error.localizedDescription)")
-                                        showAdFailedAlert = true
-                                    },
-                                    onAdDismissed: { isGranted in
-                                        if isGranted {
-                                            DispatchQueue.main.async {
-                                               
-                                            }
-                                        }
-                                    })
-                            } else {
-                                showNetworkAlert = true
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Ad Examples")
+                            .font(.largeTitle.bold())
+                        Text("Chọn một loại quảng cáo để xem example. Quảng cáo chỉ load khi bạn mở màn đó.")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 8)
+
+                    ForEach(sections, id: \.title) { section in
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text(section.title.uppercased())
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(.secondary)
+                                .padding(.horizontal, 20)
+
+                            VStack(spacing: 10) {
+                                ForEach(section.items) { item in
+                                    NavigationLink(value: item) {
+                                        AdExampleRow(example: item)
+                                    }
+                                    .buttonStyle(.plain)
+                                }
                             }
+                            .padding(.horizontal, 16)
                         }
+                    }
                 }
-                
-                VStack {
-                    Spacer()
-                    
-                    nativeView(
-                        configKey: "NATIVE",
-                        onAdLoaded: {
-                            
-                        },
-                        onAdFailedToLoad: { error in
-                            
-                        }
-                    )
-                    
-                    adsBannerNativeView(
-                        configKey: "ADS_HOME",
-                        onAdLoaded: {
-                            print("✅ ADS_HOME loaded")
-                        },
-                        onAdFailedToLoad: { error in
-                            print("❌ ADS_HOME failed: \(error)")
-                        }
-                    )
-                }
-                
+                .padding(.bottom, 24)
             }
-            .ignoresSafeArea()
-            .navigationDestination(isPresented: $isNextScreen) {
-                SwiftUIView()
+            .background(Color(.systemGroupedBackground))
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: AdExample.self) { example in
+                AdExampleScreen(example: example, showNetworkAlert: $showNetworkAlert)
             }
             .alert("home.no_internet".localized(), isPresented: $showNetworkAlert) {
-                      Button("home.ok".localized(), role: .cancel) {
-                          showNetworkAlert = false
-                          showWiFiInstruction()
-                      }
-                  } message: {
-                      Text("home.no_internet_message".localized())
-                  }
-            .alert("home.ad_failed_title".localized(), isPresented: $showAdFailedAlert) {
-                Button("home.try_again".localized()) {
-                    showAdFailedAlert = false
-                }
-                Button("home.cancel".localized(), role: .cancel) {
-                    showAdFailedAlert = false
+                Button("home.ok".localized(), role: .cancel) {
+                    showNetworkAlert = false
+                    showWiFiInstruction()
                 }
             } message: {
-                Text("home.ad_failed_message".localized())
+                Text("home.no_internet_message".localized())
             }
             .onAppear {
                 if !isViewAppeared {
@@ -115,28 +86,17 @@ struct ContentView: View {
             }
         }
     }
-    
-    
+
     // MARK: - ATT Permission
     private func requestATTrackingPermission() {
-        guard !hasRequestedATT else {
-            print("🚫 ATT already requested, skipping...")
-            return
-        }
+        guard !hasRequestedATT else { return }
 
-        // Check current ATT status first
         let currentStatus = ATTrackingManager.trackingAuthorizationStatus
-        print("🔍 Current ATT status: \(currentStatus.rawValue)")
-
-        // Only request if status is notDetermined
         guard currentStatus == .notDetermined else {
-            print("⚠️ ATT status is not notDetermined, skipping request")
             hasRequestedATT = true
             return
         }
 
-        print("⏰ Requesting ATT permission in 2 seconds...")
-        print("🚀 Requesting ATT permission now...")
         ATTrackingManager.requestTrackingAuthorization { status in
             DispatchQueue.main.async {
                 self.hasRequestedATT = true
@@ -157,13 +117,10 @@ struct ContentView: View {
         }
     }
 
-    // MARK: - Notification Permission
-    /// Gọi sau ATT (delay) để không đụng 2 system alert cùng lúc.
     private func requestNotificationPermission() {
         guard !hasRequestedNotification else { return }
 
         UNUserNotificationCenter.current().getNotificationSettings { settings in
-            // Extract value here — UNNotificationSettings isn't Sendable
             let status = settings.authorizationStatus
             DispatchQueue.main.async {
                 guard status == .notDetermined else {
@@ -171,31 +128,60 @@ struct ContentView: View {
                     return
                 }
 
-                // Đợi ATT dialog xong (~1.5s) rồi mới hỏi notification
                 UNUserNotificationCenter.current().requestAuthorization(
                     options: [.alert, .badge, .sound]
-                ) { granted, error in
+                ) { granted, _ in
                     print("Notification permission: \(granted)")
                 }
             }
         }
     }
-    
+
     private func showWiFiInstruction() {
         let alert = UIAlertController(
             title: "home.wifi_instruction_title".localized(),
             message: "home.wifi_instruction_message".localized(),
             preferredStyle: .alert
         )
-        
         alert.addAction(UIAlertAction(title: "home.ok".localized(), style: .default))
-        
+
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let window = windowScene.windows.first {
             window.rootViewController?.present(alert, animated: true)
         }
     }
-    
+}
+
+private struct AdExampleRow: View {
+    let example: AdExample
+
+    var body: some View {
+        HStack(spacing: 14) {
+            Text(example.badge)
+                .font(.caption.weight(.bold))
+                .foregroundStyle(example.tint)
+                .frame(width: 44, height: 44)
+                .background(example.tint.opacity(0.14), in: RoundedRectangle(cornerRadius: 12))
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(example.title)
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(.primary)
+                Text(example.summary)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+            }
+
+            Spacer(minLength: 8)
+
+            Image(systemName: "chevron.right")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.tertiary)
+        }
+        .padding(14)
+        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 16))
+    }
 }
 
 #Preview {
