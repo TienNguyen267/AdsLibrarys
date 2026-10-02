@@ -14,6 +14,7 @@ public enum TypeAds: String {
     case aoa = "AOA_ADS"
     case interAds = "INTER_ADS"
     case rewardAds = "REWARD_ADS"
+    case pipAds = "PIP_ADS"
  
     
     public var typeNumber: SolarEngineAdType {
@@ -28,6 +29,8 @@ public enum TypeAds: String {
                 return SolarEngineAdType.interstitial
             case .rewardAds:
                 return SolarEngineAdType.rewardVideo
+            case .pipAds:
+                return SolarEngineAdType.other
             }
         }
  

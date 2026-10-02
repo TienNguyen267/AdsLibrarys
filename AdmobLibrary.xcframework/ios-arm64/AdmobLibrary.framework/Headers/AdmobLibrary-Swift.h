@@ -347,6 +347,7 @@ extern "C" {
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import GoogleMobileAds;
+@import GoogleMobileAds_Private;
 @import ObjectiveC;
 @import UIKit;
 #endif
@@ -485,12 +486,16 @@ SWIFT_CLASS("_TtC12AdmobLibrary15OnResumeManager")
 - (void)ad:(id <GADFullScreenPresentingAd> _Nonnull)ad didFailToPresentFullScreenContentWithError:(NSError * _Nonnull)error;
 @end
 
-/// Singleton class that loads, manages lifecycle, and handles events for Picture-in-Picture (PiP)
-/// ads.
+@class GADPictureInPictureAd;
 SWIFT_CLASS("_TtC12AdmobLibrary25PictureInPictureAdManager")
-@interface PictureInPictureAdManager : NSObject
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@interface PictureInPictureAdManager : NSObject <GADPictureInPictureAdDelegate>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (void)pictureInPictureAdDidShow:(GADPictureInPictureAd * _Nonnull)pictureInPictureAd;
+- (void)pictureInPictureAdDidHide:(GADPictureInPictureAd * _Nonnull)pictureInPictureAd;
+- (void)pictureInPictureAdDidFailToShow:(GADPictureInPictureAd * _Nonnull)pictureInPictureAd withError:(NSError * _Nonnull)error;
+- (void)pictureInPictureAdDidRecordImpression:(GADPictureInPictureAd * _Nonnull)pictureInPictureAd;
+- (void)pictureInPictureAdWillPresentScreen:(GADPictureInPictureAd * _Nonnull)pictureInPictureAd;
+- (void)pictureInPictureAdDidDismissScreen:(GADPictureInPictureAd * _Nonnull)pictureInPictureAd;
 @end
 
 SWIFT_CLASS("_TtC12AdmobLibrary15RewardAdManager")

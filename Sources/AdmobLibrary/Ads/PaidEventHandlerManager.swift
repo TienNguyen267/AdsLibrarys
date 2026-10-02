@@ -7,11 +7,12 @@
 
 import Foundation
 import GoogleMobileAds
+import GoogleMobileAds_Private
 import SolarEngineSDK
 
 public class PaidEventHandlerManager {
     static public let shared = PaidEventHandlerManager()
-    public func getPaidEventHandler(dataPaidEvent: AdValue, typeAds: TypeAds, aoa: AppOpenAd? = nil, native: NativeAd? = nil, inter: InterstitialAd? = nil, banner: BannerView? = nil, reward: RewardedAd? = nil, rewardedInterstitial: RewardedInterstitialAd? = nil, adUnit: String) {
+    public func getPaidEventHandler(dataPaidEvent: AdValue, typeAds: TypeAds, aoa: AppOpenAd? = nil, native: NativeAd? = nil, inter: InterstitialAd? = nil, banner: BannerView? = nil, reward: RewardedAd? = nil, rewardedInterstitial: RewardedInterstitialAd? = nil, pip: PictureInPictureAd? = nil, adUnit: String) {
         var adSourceName: String?
         var adSourceId: String?
         var responseInfo: ResponseInfo?
@@ -39,6 +40,11 @@ public class PaidEventHandlerManager {
             adSourceId   = loadedAdNetworkResponseInfo?.adSourceID ?? "unknown"
         case .rewardAds:
             responseInfo = reward?.responseInfo ?? rewardedInterstitial?.responseInfo
+            let loadedAdNetworkResponseInfo = responseInfo?.loadedAdNetworkResponseInfo
+            adSourceName = loadedAdNetworkResponseInfo?.adSourceInstanceName
+            adSourceId   = loadedAdNetworkResponseInfo?.adSourceID ?? "unknown"
+        case .pipAds:
+            responseInfo = pip?.responseInfo
             let loadedAdNetworkResponseInfo = responseInfo?.loadedAdNetworkResponseInfo
             adSourceName = loadedAdNetworkResponseInfo?.adSourceInstanceName
             adSourceId   = loadedAdNetworkResponseInfo?.adSourceID ?? "unknown"

@@ -759,18 +759,23 @@ extension AdmobLibrary::OnResumeManager : GoogleMobileAds::FullScreenContentDele
 }
 @_hasMissingDesignatedInitializers @_Concurrency::MainActor public class PaidEventHandlerManager {
   @_Concurrency::MainActor public static let shared: AdmobLibrary::PaidEventHandlerManager
-  @_Concurrency::MainActor public func getPaidEventHandler(dataPaidEvent: GoogleMobileAds::AdValue, typeAds: AdmobLibrary::TypeAds, aoa: GoogleMobileAds::AppOpenAd? = nil, native: GoogleMobileAds::NativeAd? = nil, inter: GoogleMobileAds::InterstitialAd? = nil, banner: GoogleMobileAds::BannerView? = nil, reward: GoogleMobileAds::RewardedAd? = nil, rewardedInterstitial: GoogleMobileAds::RewardedInterstitialAd? = nil, adUnit: Swift::String)
+  @_Concurrency::MainActor public func getPaidEventHandler(dataPaidEvent: GoogleMobileAds::AdValue, typeAds: AdmobLibrary::TypeAds, aoa: GoogleMobileAds::AppOpenAd? = nil, native: GoogleMobileAds::NativeAd? = nil, inter: GoogleMobileAds::InterstitialAd? = nil, banner: GoogleMobileAds::BannerView? = nil, reward: GoogleMobileAds::RewardedAd? = nil, rewardedInterstitial: GoogleMobileAds::RewardedInterstitialAd? = nil, pip: GoogleMobileAds_Private::PictureInPictureAd? = nil, adUnit: Swift::String)
   @objc @_Concurrency::MainActor deinit
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency::MainActor public class PictureInPictureAdManager : ObjectiveC::NSObject {
-  @_Concurrency::MainActor public static let shared: AdmobLibrary::PictureInPictureAdManager
-  @_Concurrency::MainActor public var onAdShownListener: (@_Concurrency::MainActor @Sendable () -> Swift::Void)?
-  @_Concurrency::MainActor public var onAdHiddenListener: (@_Concurrency::MainActor @Sendable () -> Swift::Void)?
-  @_Concurrency::MainActor public func loadAd() async throws
-  @_Concurrency::MainActor public func showAd()
-  @_Concurrency::MainActor public func hideAd()
-  @_Concurrency::MainActor public func destroyAd()
-  @_Concurrency::MainActor public func isAdAvailable() -> Swift::Bool
+@objc @_inheritsConvenienceInitializers @_Concurrency::MainActor public class PictureInPictureAdManager : ObjectiveC::NSObject, GoogleMobileAds_Private::PictureInPictureAdDelegate {
+  @_Concurrency::MainActor public var pictureInPictureAd: GoogleMobileAds_Private::PictureInPictureAd?
+  @_Concurrency::MainActor public var isLoading: Swift::Bool
+  @_Concurrency::MainActor public var onAdDismissed: (@_Concurrency::MainActor @Sendable () -> Swift::Void)?
+  @_Concurrency::MainActor @objc override dynamic public init()
+  @_Concurrency::MainActor public func loadPictureInPictureAd(adUnitID: Swift::String, onAdLoaded: (@_Concurrency::MainActor @Sendable () -> Swift::Void)? = nil, onAdFailedToLoad: (@_Concurrency::MainActor @Sendable (any Swift::Error) -> Swift::Void)? = nil, onAdDismissed: (@_Concurrency::MainActor @Sendable () -> Swift::Void)? = nil)
+  @_Concurrency::MainActor public func showPictureInPictureAd()
+  @_Concurrency::MainActor public func hidePictureInPictureAd()
+  @_Concurrency::MainActor @preconcurrency @objc public func pictureInPictureAdDidShow(_ pictureInPictureAd: GoogleMobileAds_Private::PictureInPictureAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func pictureInPictureAdDidHide(_ pictureInPictureAd: GoogleMobileAds_Private::PictureInPictureAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func pictureInPictureAdDidFailToShow(_ pictureInPictureAd: GoogleMobileAds_Private::PictureInPictureAd, error: any Swift::Error)
+  @_Concurrency::MainActor @preconcurrency @objc public func pictureInPictureAdDidRecordImpression(_ pictureInPictureAd: GoogleMobileAds_Private::PictureInPictureAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func pictureInPictureAdWillPresentScreen(_ pictureInPictureAd: GoogleMobileAds_Private::PictureInPictureAd)
+  @_Concurrency::MainActor @preconcurrency @objc public func pictureInPictureAdDidDismissScreen(_ pictureInPictureAd: GoogleMobileAds_Private::PictureInPictureAd)
   @objc @_Concurrency::MainActor deinit
 }
 @_hasMissingDesignatedInitializers @_Concurrency::MainActor public class RemoteConfigManager {
@@ -824,6 +829,7 @@ extension AdmobLibrary::OnResumeManager : GoogleMobileAds::FullScreenContentDele
   case aoa
   case interAds
   case rewardAds
+  case pipAds
   @_Concurrency::MainActor public var typeNumber: SolarEngineSDK::SolarEngineAdType {
     get
   }

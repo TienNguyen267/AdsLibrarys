@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var hasRequestedATT = false
     @State private var hasRequestedNotification = false
     @State private var isViewAppeared = false
+    @State private var pictureInPictureManager = PictureInPictureAdManager()
 
     private let sections: [(title: String, items: [AdExample])] = [
         ("Banner", [.banner, .bannerCollapsible]),
@@ -38,10 +39,9 @@ struct ContentView: View {
                         Text("Ad Examples")
                             .font(.largeTitle.bold())
                             .onTapGesture {
-                                Task {
-                                    try await PictureInPictureAdManager.shared.loadAd()
-                                    PictureInPictureAdManager.shared.showAd()
-                                }
+                                pictureInPictureManager.loadPictureInPictureAd(
+                                    adUnitID: "ca-app-pub-3940256099942544/8810945611"
+                                )
                             }
                         
                         
