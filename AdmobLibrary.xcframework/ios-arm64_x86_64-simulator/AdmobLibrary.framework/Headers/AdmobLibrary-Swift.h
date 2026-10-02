@@ -485,6 +485,14 @@ SWIFT_CLASS("_TtC12AdmobLibrary15OnResumeManager")
 - (void)ad:(id <GADFullScreenPresentingAd> _Nonnull)ad didFailToPresentFullScreenContentWithError:(NSError * _Nonnull)error;
 @end
 
+/// Singleton class that loads, manages lifecycle, and handles events for Picture-in-Picture (PiP)
+/// ads.
+SWIFT_CLASS("_TtC12AdmobLibrary25PictureInPictureAdManager")
+@interface PictureInPictureAdManager : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 SWIFT_CLASS("_TtC12AdmobLibrary15RewardAdManager")
 @interface RewardAdManager : NSObject <GADFullScreenContentDelegate>
 - (void)ad:(id <GADFullScreenPresentingAd> _Nonnull)ad didFailToPresentFullScreenContentWithError:(NSError * _Nonnull)error;
@@ -995,6 +1003,14 @@ SWIFT_CLASS("_TtC12AdmobLibrary15OnResumeManager")
 - (void)adDidDismissFullScreenContent:(id <GADFullScreenPresentingAd> _Nonnull)ad;
 - (void)adWillDismissFullScreenContent:(id <GADFullScreenPresentingAd> _Nonnull)ad;
 - (void)ad:(id <GADFullScreenPresentingAd> _Nonnull)ad didFailToPresentFullScreenContentWithError:(NSError * _Nonnull)error;
+@end
+
+/// Singleton class that loads, manages lifecycle, and handles events for Picture-in-Picture (PiP)
+/// ads.
+SWIFT_CLASS("_TtC12AdmobLibrary25PictureInPictureAdManager")
+@interface PictureInPictureAdManager : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 SWIFT_CLASS("_TtC12AdmobLibrary15RewardAdManager")

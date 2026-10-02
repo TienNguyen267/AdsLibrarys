@@ -30,7 +30,9 @@ private struct AdsSplashContainerView: View {
         if let splash = RemoteConfigManager.shared.getValue(forKey: "ADS_SPLASH", as: SplashConfig.self) {
 
             if splash.organic && Common.isOrganic {
-                Color.clear
+                Color.clear.onAppear {
+                    onAdDismiss()
+                }
             } else {
                 switch splash.bannerSplash {
 

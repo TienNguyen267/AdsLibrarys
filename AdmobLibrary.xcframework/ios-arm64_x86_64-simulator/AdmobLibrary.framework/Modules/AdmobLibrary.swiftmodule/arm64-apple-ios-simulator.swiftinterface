@@ -7,6 +7,7 @@ import AVFoundation
 import Combine
 import Foundation
 @preconcurrency import GoogleMobileAds
+import GoogleMobileAds_Private
 import Network
 import SolarEngineSDK
 import Swift
@@ -761,6 +762,17 @@ extension AdmobLibrary::OnResumeManager : GoogleMobileAds::FullScreenContentDele
   @_Concurrency::MainActor public func getPaidEventHandler(dataPaidEvent: GoogleMobileAds::AdValue, typeAds: AdmobLibrary::TypeAds, aoa: GoogleMobileAds::AppOpenAd? = nil, native: GoogleMobileAds::NativeAd? = nil, inter: GoogleMobileAds::InterstitialAd? = nil, banner: GoogleMobileAds::BannerView? = nil, reward: GoogleMobileAds::RewardedAd? = nil, rewardedInterstitial: GoogleMobileAds::RewardedInterstitialAd? = nil, adUnit: Swift::String)
   @objc @_Concurrency::MainActor deinit
 }
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency::MainActor public class PictureInPictureAdManager : ObjectiveC::NSObject {
+  @_Concurrency::MainActor public static let shared: AdmobLibrary::PictureInPictureAdManager
+  @_Concurrency::MainActor public var onAdShownListener: (@_Concurrency::MainActor @Sendable () -> Swift::Void)?
+  @_Concurrency::MainActor public var onAdHiddenListener: (@_Concurrency::MainActor @Sendable () -> Swift::Void)?
+  @_Concurrency::MainActor public func loadAd() async throws
+  @_Concurrency::MainActor public func showAd()
+  @_Concurrency::MainActor public func hideAd()
+  @_Concurrency::MainActor public func destroyAd()
+  @_Concurrency::MainActor public func isAdAvailable() -> Swift::Bool
+  @objc @_Concurrency::MainActor deinit
+}
 @_hasMissingDesignatedInitializers @_Concurrency::MainActor public class RemoteConfigManager {
   @_Concurrency::MainActor public static let shared: AdmobLibrary::RemoteConfigManager
   @_Concurrency::MainActor public func initRemoteConfig(defaults: [Swift::String : ObjectiveC::NSObject], onComplete: @escaping @_Concurrency::MainActor @Sendable () -> Swift::Void)
@@ -874,6 +886,7 @@ extension AdmobLibrary::NativeSmallAdLoadingView : Swift::Sendable {}
 extension AdmobLibrary::NetworkMonitor : Swift::Sendable {}
 extension AdmobLibrary::OnResumeManager : Swift::Sendable {}
 extension AdmobLibrary::PaidEventHandlerManager : Swift::Sendable {}
+extension AdmobLibrary::PictureInPictureAdManager : Swift::Sendable {}
 extension AdmobLibrary::RemoteConfigManager : Swift::Sendable {}
 extension AdmobLibrary::RewardAdManager : Swift::Sendable {}
 extension AdmobLibrary::RewardedInterstitialAdManager : Swift::Sendable {}

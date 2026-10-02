@@ -21,6 +21,45 @@
 		297ECA311E22B1ED37371482 /* Pods_AdmobLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdmobLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32ACA36ECDA35AF3554B4CF1 /* Pods-AdmobLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdmobLibrary.release.xcconfig"; path = "Target Support Files/Pods-AdmobLibrary/Pods-AdmobLibrary.release.xcconfig"; sourceTree = "<group>"; };
 		388FA8EA2FFDF38F00BEAD80 /* AdmobLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdmobLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		38DEF424306F564C008C94D2 /* AdsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsManager.swift; sourceTree = "<group>"; };
+		38DEF425306F564C008C94D2 /* AppOpenAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenAdManager.swift; sourceTree = "<group>"; };
+		38DEF426306F564C008C94D2 /* BannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
+		38DEF427306F564C008C94D2 /* DebugModeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugModeManager.swift; sourceTree = "<group>"; };
+		38DEF428306F564C008C94D2 /* GoogleMobileAdsConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsConsentManager.swift; sourceTree = "<group>"; };
+		38DEF429306F564C008C94D2 /* InterstitialAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAdManager.swift; sourceTree = "<group>"; };
+		38DEF42A306F564C008C94D2 /* LoadingAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAdView.swift; sourceTree = "<group>"; };
+		38DEF42B306F564C008C94D2 /* NativeAdFullScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdFullScreen.swift; sourceTree = "<group>"; };
+		38DEF42C306F564C008C94D2 /* NativeAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdView.swift; sourceTree = "<group>"; };
+		38DEF42D306F564C008C94D2 /* NativeCollapAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeCollapAdView.swift; sourceTree = "<group>"; };
+		38DEF42E306F564C008C94D2 /* NativeHolderAdmob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeHolderAdmob.swift; sourceTree = "<group>"; };
+		38DEF42F306F564C008C94D2 /* NativeSmallBannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSmallBannerAdView.swift; sourceTree = "<group>"; };
+		38DEF430306F564C008C94D2 /* NativeSmallPlayAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeSmallPlayAdView.swift; sourceTree = "<group>"; };
+		38DEF431306F564C008C94D2 /* OnResumeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnResumeManager.swift; sourceTree = "<group>"; };
+		38DEF432306F564C008C94D2 /* PaidEventHandlerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidEventHandlerManager.swift; sourceTree = "<group>"; };
+		38DEF433306F564C008C94D2 /* RewardAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardAdManager.swift; sourceTree = "<group>"; };
+		38DEF434306F564C008C94D2 /* RewardedInterstitialAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedInterstitialAdManager.swift; sourceTree = "<group>"; };
+		38DEF435306F564C008C94D2 /* SolarEngineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarEngineManager.swift; sourceTree = "<group>"; };
+		38DEF436306F564C008C94D2 /* TenjinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenjinManager.swift; sourceTree = "<group>"; };
+		38DEF437306F564C008C94D2 /* TypeAds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAds.swift; sourceTree = "<group>"; };
+		38DEF439306F564C008C94D2 /* AdsBannerNativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsBannerNativeView.swift; sourceTree = "<group>"; };
+		38DEF43A306F564C008C94D2 /* AdsSplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsSplashView.swift; sourceTree = "<group>"; };
+		38DEF43B306F564C008C94D2 /* LoadAndShowInter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndShowInter.swift; sourceTree = "<group>"; };
+		38DEF43C306F564C008C94D2 /* ModelFireBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelFireBase.swift; sourceTree = "<group>"; };
+		38DEF43D306F564C008C94D2 /* NativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeView.swift; sourceTree = "<group>"; };
+		38DEF43E306F564C008C94D2 /* RemoteConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigManager.swift; sourceTree = "<group>"; };
+		38DEF440306F564C008C94D2 /* nativeAdFullScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nativeAdFullScreen.xib; sourceTree = "<group>"; };
+		38DEF441306F564C008C94D2 /* nativeAdSmallPlay.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nativeAdSmallPlay.xib; sourceTree = "<group>"; };
+		38DEF442306F564C008C94D2 /* NativeAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativeAdView.xib; sourceTree = "<group>"; };
+		38DEF443306F564C008C94D2 /* nativeMediumCollap.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nativeMediumCollap.xib; sourceTree = "<group>"; };
+		38DEF444306F564C008C94D2 /* nativeSmallest.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = nativeSmallest.xib; sourceTree = "<group>"; };
+		38DEF446306F564C008C94D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		38DEF447306F564C008C94D2 /* gifloading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gifloading.json; sourceTree = "<group>"; };
+		38DEF449306F564C008C94D2 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		38DEF44A306F564C008C94D2 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		38DEF44B306F564C008C94D2 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
+		38DEF44C306F564C008C94D2 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		38DEF44E306F564C008C94D2 /* AdmobLibraryAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmobLibraryAssets.swift; sourceTree = "<group>"; };
+		38DEF8D6306FA032008C94D2 /* PictureInPictureAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureInPictureAdManager.swift; sourceTree = "<group>"; };
 		916DEF2613E8913F9376DDEF /* Pods-AdmobLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdmobLibrary.debug.xcconfig"; path = "Target Support Files/Pods-AdmobLibrary/Pods-AdmobLibrary.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +106,7 @@
 		388FA8E12FFDF38F00BEAD80 = {
 			isa = PBXGroup;
 			children = (
+				38DEF450306F564C008C94D2 /* Sources */,
 				388FA8EC2FFDF38F00BEAD80 /* AdmobLibrary */,
 				388FA8EB2FFDF38F00BEAD80 /* Products */,
 				4518FA22A9CD251293709315 /* Pods */,
@@ -80,6 +120,100 @@
 				388FA8EA2FFDF38F00BEAD80 /* AdmobLibrary.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		38DEF438306F564C008C94D2 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				38DEF8D6306FA032008C94D2 /* PictureInPictureAdManager.swift */,
+				38DEF424306F564C008C94D2 /* AdsManager.swift */,
+				38DEF425306F564C008C94D2 /* AppOpenAdManager.swift */,
+				38DEF426306F564C008C94D2 /* BannerAdView.swift */,
+				38DEF427306F564C008C94D2 /* DebugModeManager.swift */,
+				38DEF428306F564C008C94D2 /* GoogleMobileAdsConsentManager.swift */,
+				38DEF429306F564C008C94D2 /* InterstitialAdManager.swift */,
+				38DEF42A306F564C008C94D2 /* LoadingAdView.swift */,
+				38DEF42B306F564C008C94D2 /* NativeAdFullScreen.swift */,
+				38DEF42C306F564C008C94D2 /* NativeAdView.swift */,
+				38DEF42D306F564C008C94D2 /* NativeCollapAdView.swift */,
+				38DEF42E306F564C008C94D2 /* NativeHolderAdmob.swift */,
+				38DEF42F306F564C008C94D2 /* NativeSmallBannerAdView.swift */,
+				38DEF430306F564C008C94D2 /* NativeSmallPlayAdView.swift */,
+				38DEF431306F564C008C94D2 /* OnResumeManager.swift */,
+				38DEF432306F564C008C94D2 /* PaidEventHandlerManager.swift */,
+				38DEF433306F564C008C94D2 /* RewardAdManager.swift */,
+				38DEF434306F564C008C94D2 /* RewardedInterstitialAdManager.swift */,
+				38DEF435306F564C008C94D2 /* SolarEngineManager.swift */,
+				38DEF436306F564C008C94D2 /* TenjinManager.swift */,
+				38DEF437306F564C008C94D2 /* TypeAds.swift */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
+		38DEF43F306F564C008C94D2 /* RemoteConfig */ = {
+			isa = PBXGroup;
+			children = (
+				38DEF439306F564C008C94D2 /* AdsBannerNativeView.swift */,
+				38DEF43A306F564C008C94D2 /* AdsSplashView.swift */,
+				38DEF43B306F564C008C94D2 /* LoadAndShowInter.swift */,
+				38DEF43C306F564C008C94D2 /* ModelFireBase.swift */,
+				38DEF43D306F564C008C94D2 /* NativeView.swift */,
+				38DEF43E306F564C008C94D2 /* RemoteConfigManager.swift */,
+			);
+			path = RemoteConfig;
+			sourceTree = "<group>";
+		};
+		38DEF445306F564C008C94D2 /* LayoutAds */ = {
+			isa = PBXGroup;
+			children = (
+				38DEF440306F564C008C94D2 /* nativeAdFullScreen.xib */,
+				38DEF441306F564C008C94D2 /* nativeAdSmallPlay.xib */,
+				38DEF442306F564C008C94D2 /* NativeAdView.xib */,
+				38DEF443306F564C008C94D2 /* nativeMediumCollap.xib */,
+				38DEF444306F564C008C94D2 /* nativeSmallest.xib */,
+			);
+			path = LayoutAds;
+			sourceTree = "<group>";
+		};
+		38DEF448306F564C008C94D2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				38DEF445306F564C008C94D2 /* LayoutAds */,
+				38DEF446306F564C008C94D2 /* Assets.xcassets */,
+				38DEF447306F564C008C94D2 /* gifloading.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		38DEF44D306F564C008C94D2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				38DEF449306F564C008C94D2 /* Common.swift */,
+				38DEF44A306F564C008C94D2 /* Extension.swift */,
+				38DEF44B306F564C008C94D2 /* LocalizationManager.swift */,
+				38DEF44C306F564C008C94D2 /* NetworkMonitor.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		38DEF44F306F564C008C94D2 /* AdmobLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				38DEF438306F564C008C94D2 /* Ads */,
+				38DEF43F306F564C008C94D2 /* RemoteConfig */,
+				38DEF448306F564C008C94D2 /* Resources */,
+				38DEF44D306F564C008C94D2 /* Utils */,
+				38DEF44E306F564C008C94D2 /* AdmobLibraryAssets.swift */,
+			);
+			path = AdmobLibrary;
+			sourceTree = "<group>";
+		};
+		38DEF450306F564C008C94D2 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				38DEF44F306F564C008C94D2 /* AdmobLibrary */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		4518FA22A9CD251293709315 /* Pods */ = {
@@ -372,7 +506,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C565SJT9RF;
+				DEVELOPMENT_TEAM = TN4334K4K4;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -410,7 +544,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C565SJT9RF;
+				DEVELOPMENT_TEAM = TN4334K4K4;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;

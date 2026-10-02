@@ -37,6 +37,14 @@ struct ContentView: View {
                     VStack(alignment: .leading, spacing: 6) {
                         Text("Ad Examples")
                             .font(.largeTitle.bold())
+                            .onTapGesture {
+                                Task {
+                                    try await PictureInPictureAdManager.shared.loadAd()
+                                    PictureInPictureAdManager.shared.showAd()
+                                }
+                            }
+                        
+                        
                         Text("Chọn một loại quảng cáo để xem example. Quảng cáo chỉ load khi bạn mở màn đó.")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
