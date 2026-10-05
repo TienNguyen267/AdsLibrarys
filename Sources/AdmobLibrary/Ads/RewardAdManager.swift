@@ -11,15 +11,15 @@ import SwiftUI
 // Interstitial Ad Manager
 @MainActor
 public class RewardAdManager: NSObject, FullScreenContentDelegate {
-     public var rewardedAd: RewardedAd?
-     public var isLoading = false
-     public var onAdDismissed: (@MainActor @Sendable (Bool) -> Void)?
-     public var isGranted = false
+    public var rewardedAd: RewardedAd?
+    public var isLoading = false
+    public var onAdDismissed: (@MainActor @Sendable (Bool) -> Void)?
+    public var isGranted = false
     
     public func loadRewardedAdAd(adUnitID: String,
-                            onAdLoaded: (@MainActor @Sendable () -> Void)? = nil,
-                            onAdFailedToLoad: (@MainActor @Sendable (Error) -> Void)? = nil,
-                            onAdDismissed: (@MainActor @Sendable (Bool) -> Void)? = nil) {
+                                 onAdLoaded: (@MainActor @Sendable () -> Void)? = nil,
+                                 onAdFailedToLoad: (@MainActor @Sendable (Error) -> Void)? = nil,
+                                 onAdDismissed: (@MainActor @Sendable (Bool) -> Void)? = nil) {
         
         guard !isLoading else { return }
         
@@ -29,6 +29,7 @@ public class RewardAdManager: NSObject, FullScreenContentDelegate {
             onAdDismissed?(true)
             return
         }
+        self.isGranted = false
         self.onAdDismissed = onAdDismissed
         isLoading = true
         // Hiển thị loading view
@@ -36,9 +37,9 @@ public class RewardAdManager: NSObject, FullScreenContentDelegate {
         
         let request = Request()
         let adID = Common.isDebug
-            ? "ca-app-pub-3940256099942544/1712485313"
-            : adUnitID
-            
+        ? "ca-app-pub-3940256099942544/1712485313"
+        : adUnitID
+        
         Task { @MainActor [weak self] in
             guard let self = self else { return }
             do {
@@ -83,6 +84,7 @@ public class RewardAdManager: NSObject, FullScreenContentDelegate {
               let rootViewController = windowScene.windows.first?.rootViewController else {
             print("No root view controller found")
             LoadingAdViewController.shared.hide()
+            onAdDismissed?(false)
             return
         }
         AdsManager.shared.isShowingAd = true
@@ -99,6 +101,10 @@ public class RewardAdManager: NSObject, FullScreenContentDelegate {
         print("Failed to present interstitial ad: \(error.localizedDescription)")
         // Ẩn loading view khi hiển thị quảng cáo thất bại
         LoadingAdViewController.shared.hide()
+        AdsManager.shared.isShowingAd = false
+        let callback = onAdDismissed
+        onAdDismissed = nil
+        callback?(false)
     }
     
     public func adWillPresentFullScreenContent(_ ad: FullScreenPresentingAd) {

@@ -254,7 +254,7 @@ public struct BannerAdViewHeightModifier: ViewModifier {
 }
 
 public extension View {
-    public func bannerAdHeight() -> some View {
+    func bannerAdHeight() -> some View {
         modifier(BannerAdViewHeightModifier())
     }
 }
