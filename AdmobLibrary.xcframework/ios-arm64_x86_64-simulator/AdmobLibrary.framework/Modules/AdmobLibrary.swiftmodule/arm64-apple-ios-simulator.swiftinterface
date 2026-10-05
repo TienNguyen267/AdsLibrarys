@@ -10,12 +10,14 @@ import Foundation
 import GoogleMobileAds_Private
 import Network
 import SolarEngineSDK
+import StoreKit
 import Swift
 import SwiftUI
 import TenjinSDK
 import UIKit
 @preconcurrency import UserMessagingPlatform
 import _Concurrency
+import _StoreKit_SwiftUI
 import _StringProcessing
 import _SwiftConcurrencyShims
 @_Concurrency::MainActor public enum AdmobLibraryAssets {
@@ -778,6 +780,46 @@ extension AdmobLibrary::OnResumeManager : GoogleMobileAds::FullScreenContentDele
   @_Concurrency::MainActor @preconcurrency @objc public func pictureInPictureAdDidDismissScreen(_ pictureInPictureAd: GoogleMobileAds_Private::PictureInPictureAd)
   @objc @_Concurrency::MainActor deinit
 }
+@_hasMissingDesignatedInitializers @_Concurrency::MainActor final public class RatingDialog {
+  @discardableResult
+  @_Concurrency::MainActor final public func show() -> Swift::Bool
+  @_Concurrency::MainActor final public class Builder {
+    @_Concurrency::MainActor public init()
+    @discardableResult
+    @_Concurrency::MainActor final public func session(_ value: Swift::Int) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func date(_ value: Swift::Int) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func ignoreRated(_ value: Swift::Bool) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func isShowButtonLater(_ value: Swift::Bool) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func isClickLaterDismiss(_ value: Swift::Bool) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func setTextButtonLater(_ value: Swift::String) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func title(_ value: Swift::String) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func setNameApp(_ value: Swift::String) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func setEmail(_ value: Swift::String) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func setDeviceInfo(appVersion: Swift::String, sdkVersion: Swift::String, deviceName: Swift::String) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func setAppStoreID(_ value: Swift::String) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func setIcon(_ image: UIKit::UIImage?) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func ratingButtonColor(_ color: UIKit::UIColor) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func setOnClickMaybeLater(_ callback: @escaping () -> Swift::Void) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @discardableResult
+    @_Concurrency::MainActor final public func setOnClickRate(_ callback: @escaping (Swift::Int) -> Swift::Void) -> AdmobLibrary::RatingDialog.AdmobLibrary::Builder
+    @_Concurrency::MainActor final public func build() -> AdmobLibrary::RatingDialog
+    @objc @_Concurrency::MainActor deinit
+  }
+  @objc @_Concurrency::MainActor deinit
+}
 @_hasMissingDesignatedInitializers @_Concurrency::MainActor public class RemoteConfigManager {
   @_Concurrency::MainActor public static let shared: AdmobLibrary::RemoteConfigManager
   @_Concurrency::MainActor public func initRemoteConfig(defaults: [Swift::String : ObjectiveC::NSObject], onComplete: @escaping @_Concurrency::MainActor @Sendable () -> Swift::Void)
@@ -893,6 +935,8 @@ extension AdmobLibrary::NetworkMonitor : Swift::Sendable {}
 extension AdmobLibrary::OnResumeManager : Swift::Sendable {}
 extension AdmobLibrary::PaidEventHandlerManager : Swift::Sendable {}
 extension AdmobLibrary::PictureInPictureAdManager : Swift::Sendable {}
+extension AdmobLibrary::RatingDialog : Swift::Sendable {}
+extension AdmobLibrary::RatingDialog.AdmobLibrary::Builder : Swift::Sendable {}
 extension AdmobLibrary::RemoteConfigManager : Swift::Sendable {}
 extension AdmobLibrary::RewardAdManager : Swift::Sendable {}
 extension AdmobLibrary::RewardedInterstitialAdManager : Swift::Sendable {}

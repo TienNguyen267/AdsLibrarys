@@ -52,6 +52,48 @@ struct ContentView: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 8)
 
+                    Button {
+                        RatingDialog.Builder()
+                            .session(1)
+                            .isShowButtonLater(true)
+                            .isClickLaterDismiss(true)
+                            .setNameApp("AdmobLibrary")
+                            .setEmail("support@example.com")
+                            .setOnClickRate { stars in
+                                print("Rating dialog: \(stars)")
+                            }
+                            .setOnClickMaybeLater {
+                                print("Rating dialog: maybe later")
+                            }
+                            .build()
+                            .show()
+                    } label: {
+                        HStack(spacing: 14) {
+                            Text("RT")
+                                .font(.caption.weight(.bold))
+                                .foregroundStyle(.pink)
+                                .frame(width: 44, height: 44)
+                                .background(Color.pink.opacity(0.14), in: RoundedRectangle(cornerRadius: 12))
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text("Rating Dialog")
+                                    .font(.body.weight(.semibold))
+                                    .foregroundStyle(.primary)
+                                Text("Dialog đánh giá: 1–3 sao gửi feedback, 4–5 sao mở review.")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                    .lineLimit(2)
+                            }
+                            Spacer(minLength: 8)
+                            Image(systemName: "chevron.right")
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(.tertiary)
+                        }
+                        .padding(14)
+                        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 16))
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.horizontal, 16)
+
                     ForEach(sections, id: \.title) { section in
                         VStack(alignment: .leading, spacing: 10) {
                             Text(section.title.uppercased())
