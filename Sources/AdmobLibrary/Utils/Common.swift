@@ -13,6 +13,7 @@ public class Common {
     static public var isDebug = true
     static public var checkTestAds = false
     static public var isOrganic = false
+    static public var isPurchase = false
 
 
     static public var native_full_intro_2 = "1"

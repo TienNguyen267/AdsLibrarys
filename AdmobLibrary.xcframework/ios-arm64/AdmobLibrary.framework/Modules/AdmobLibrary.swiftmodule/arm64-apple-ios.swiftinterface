@@ -105,6 +105,7 @@ extension SwiftUICore::View {
   @_Concurrency::MainActor public static var isDebug: Swift::Bool
   @_Concurrency::MainActor public static var checkTestAds: Swift::Bool
   @_Concurrency::MainActor public static var isOrganic: Swift::Bool
+  @_Concurrency::MainActor public static var isPurchase: Swift::Bool
   @_Concurrency::MainActor public static var native_full_intro_2: Swift::String
   @_Concurrency::MainActor public static var native_full_intro_3: Swift::String
   @_Concurrency::MainActor public static let NATIVE_FULL_INTRO: AdmobLibrary::NativeHolderAdmob

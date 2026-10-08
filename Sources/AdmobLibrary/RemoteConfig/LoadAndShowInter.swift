@@ -14,6 +14,12 @@ public func loadAndShowInter(
     configKey: String,
     onAdDismiss: @escaping (() -> Void)
 ) {
+    
+    if Common.isPurchase {
+        onAdDismiss()
+        return
+    }
+    
     let runner = InterAdRunner(key: configKey, onAdDismiss: onAdDismiss)
     InterAdHolder.runner = runner
     runner.loadAD()

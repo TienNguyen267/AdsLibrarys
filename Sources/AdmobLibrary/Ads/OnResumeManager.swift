@@ -61,6 +61,11 @@ public class OnResumeManager: NSObject {
     public func loadAd(adUnitID: String) {
         // Do not load ad if there is an unused ad or one is already loading.
         
+        if Common.isPurchase {
+            print("Bỏ qua quảng cáo mua IAP")
+            return
+        }
+        
         if Common.isTestDevice {
             print("Bỏ qua quảng cáo (Test Device hoặc Không có mạng hoặc tắt quảng cáo)")
             return
@@ -96,6 +101,11 @@ public class OnResumeManager: NSObject {
     }
     
     public func showAdIfAvailable() {
+        
+        if Common.isPurchase {
+            print("Bỏ qua quảng cáo mua IAP")
+            return
+        }
         
         if Common.isTestDevice {
             print("Bỏ qua quảng cáo (Test Device hoặc Không có mạng hoặc tắt quảng cáo)")

@@ -27,6 +27,12 @@ public class PictureInPictureAdManager: NSObject, PictureInPictureAdDelegate {
         guard !isLoading else { return }
 
         self.onAdDismissed = onAdDismissed
+        
+        if Common.isPurchase {
+            print("Bỏ qua quảng cáo đã mua IAP")
+            onAdDismissed?()
+            return
+        }
 
         if Common.isTestDevice {
             print("Bỏ qua quảng cáo (Test Device hoặc Không có mạng hoặc tắt quảng cáo)")

@@ -120,6 +120,7 @@ struct SplashView: View {
                     DebugModeManager.shared.configureDebugFlag(rcValue: isDebugFirebase) { isDebug in
                         print("🔥 Common.isDebug = \(isDebug)")
                         Common.isDebug = autoCheckDebug ? isDebug : isDebugFirebase
+                        Common.isPurchase = true
                         requestConsent()
                     }
                 }
