@@ -1,0 +1,24 @@
+name: Release binary
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  publish:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install CocoaPods
+        run: gem install cocoapods --no-document
+
+      - name: Build xcframework
+        run: Scripts/build-xcframework.sh
+
+      - name: Publish binary repo
+        env:
+          GH_TOKEN: ${{ secrets.DIST_REPO_TOKEN }}
+        run: Scripts/publish-binary.sh

@@ -94,7 +94,7 @@ cp -R "$IOS_FRAMEWORK" "$STAGE/ios/AdmobLibrary.framework"
 cp -R "$SIM_FRAMEWORK" "$STAGE/sim/AdmobLibrary.framework"
 
 # Drop readable internal interfaces. Public .swiftinterface stays so clients can import the module.
-find "$STAGE" \( -name '*.private.swiftinterface' -o -name '*.abi.json' \) -delete
+find "$STAGE" \( -name '*.private.swiftinterface' -o -name '*.abi.json' -o -name '*.swiftsourceinfo' \) -delete
 
 xcodebuild -create-xcframework \
   -framework "$STAGE/ios/AdmobLibrary.framework" \
