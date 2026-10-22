@@ -14,7 +14,6 @@ struct ContentView: View {
 
     @State private var showNetworkAlert = false
     @State private var hasRequestedATT = false
-    @State private var hasRequestedNotification = false
     @State private var isViewAppeared = false
     @State private var pictureInPictureManager = PictureInPictureAdManager()
 
@@ -167,6 +166,7 @@ struct ContentView: View {
         }
     }
 
+    @State private var hasRequestedNotification = false
     private func requestNotificationPermission() {
         guard !hasRequestedNotification else { return }
 

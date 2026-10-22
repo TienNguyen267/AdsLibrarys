@@ -347,6 +347,10 @@ public struct CustomNativeAdFullScreenView: UIViewRepresentable {
 // SwiftUI Native Ad View with MediaView (Android-style layout)
 public struct NativeAdFullScreenSwiftUIView: View {
     public let nativeAd: NativeAd
+
+    public init(nativeAd: NativeAd) {
+        self.nativeAd = nativeAd
+    }
     
     public var body: some View {
         // Sử dụng XIB version thay vì custom layout

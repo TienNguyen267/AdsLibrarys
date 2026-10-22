@@ -13,7 +13,7 @@ This repository is **private** and holds the Swift source. Apps install a **bina
 ## Install (app projects)
 
 ```ruby
-pod 'AdmobLibrary', '1.0.6'
+pod 'AdmobLibrary', '1.0.7'
 ```
 
 Then:
